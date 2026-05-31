@@ -42,11 +42,7 @@ fun SubjectDetailScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    val texto = if (subject == null) {
-                        "Asignatura no encontrada"
-                    } else {
-                        subject.name
-                    }
+                    val texto = subject?.name ?: "Asignatura no encontrada"
                     Text(texto)
                 },
                 actions = {

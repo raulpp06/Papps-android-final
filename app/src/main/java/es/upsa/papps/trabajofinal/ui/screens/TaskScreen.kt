@@ -69,7 +69,7 @@ fun TaskScreen(
                         .clickable {
                             navController.navigate("${Routes.TASK_DETAIL}/${task.id}")
                         },
-                    colors = CardDefaults.cardColors().copy(containerColor = Color.Red) //TODO: color mejor
+                    colors = if (task is Exam) CardDefaults.cardColors().copy(containerColor = Color.Red) else CardDefaults.cardColors() //TODO: color mejor
                 ) {
                     Row(
                         modifier = Modifier

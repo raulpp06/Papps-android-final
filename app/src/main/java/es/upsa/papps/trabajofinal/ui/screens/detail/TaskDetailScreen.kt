@@ -39,11 +39,7 @@ fun TaskDetailScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    val texto = if (task == null) {
-                        "Tarea no encontrada"
-                    } else {
-                        task.title
-                    }
+                    val texto = task?.title ?: "Tarea no encontrada"
                     Text(texto)
                 },
                 actions = {
