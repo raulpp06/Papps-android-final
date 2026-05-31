@@ -51,6 +51,15 @@ class MainViewModel : ViewModel() {
         modifyTask(id, updated)
     }
 
+    fun deleteTask(
+        id: Int,
+    ) {
+        val updated =
+            _uiState.value.tasks.filter { it.id != id }
+
+        _uiState.value = _uiState.value.copy(tasks = updated)
+    }
+
     fun addSubject(subject: Subject) {
         val updated = _uiState.value.subjects + subject
 
@@ -65,6 +74,15 @@ class MainViewModel : ViewModel() {
             _uiState.value.subjects.map {
                 if (it.id == id) subject else it
             }
+
+        _uiState.value = _uiState.value.copy(subjects = updated)
+    }
+
+    fun deleteSubject(
+        id: Int,
+    ) {
+        val updated =
+            _uiState.value.subjects.filter { it.id != id }
 
         _uiState.value = _uiState.value.copy(subjects = updated)
     }

@@ -76,7 +76,7 @@ fun AbstractTaskForm(
             subjects = subjects,
             subjectId = subjectId,
             onSubjectSelected = onSubjectSelected,
-        ) { }
+        )
 
         Spacer(Modifier.height(12.dp))
 

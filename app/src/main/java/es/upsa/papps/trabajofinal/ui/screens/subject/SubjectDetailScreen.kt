@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Warning
@@ -54,6 +55,17 @@ fun SubjectDetailScreen(
                         Icon(
                             imageVector = Icons.Default.Edit,
                             contentDescription = "Editar asignatura",
+                        )
+                    }
+                    IconButton(
+                        onClick = {
+                            navController.popBackStack()
+                            vm.deleteSubject(id)
+                        },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Borrar asignatura",
                         )
                     }
                 },
