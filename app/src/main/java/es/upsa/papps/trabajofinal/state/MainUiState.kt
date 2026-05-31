@@ -4,8 +4,10 @@ import es.upsa.papps.trabajofinal.model.data.Exam
 import es.upsa.papps.trabajofinal.model.data.Subject
 import es.upsa.papps.trabajofinal.model.data.Task
 import es.upsa.papps.trabajofinal.model.data.TaskBase
-import es.upsa.papps.trabajofinal.model.data.TaskFilter
+import es.upsa.papps.trabajofinal.model.data.filter.TaskStatusFilter
 import es.upsa.papps.trabajofinal.model.data.TaskFilters
+import es.upsa.papps.trabajofinal.model.data.filter.TaskSubjectFilter
+import es.upsa.papps.trabajofinal.model.data.filter.TaskTypeFilter
 
 data class MainUiState(
     val subjects: List<Subject>,
@@ -20,23 +22,35 @@ data class MainUiState(
 
             val f = activeTaskFilters
 
+            // ---------------- STATUS ----------------
             val statusMatch = when (f.status) {
-                TaskFilter.ALL -> true
-                TaskFilter.PENDING -> !task.isCompleted
-                TaskFilter.COMPLETED -> task.isCompleted
-                TaskFilter.EXAMS -> task is Exam
-                TaskFilter.TASKS -> task is Task
+                TaskStatusFilter.ALL -> true
+                TaskStatusFilter.PENDING -> !task.isCompleted
+                TaskStatusFilter.COMPLETED -> task.isCompleted
             }
 
-            val subjectMatch =
-                f.subjectId == null || task.subjectId == f.subjectId
+            // ---------------- SUBJECT ----------------
+            val subjectMatch = when (val s = f.subject) {
+                TaskSubjectFilter.All -> true
 
-            val typeMatch =
-                !f.onlyExams || task is Exam
+                TaskSubjectFilter.NoSubject ->
+                    task.subjectId == null
 
+                is TaskSubjectFilter.Subject ->
+                    task.subjectId == s.subjectId
+            }
+
+            // ---------------- TYPE ----------------
+            val typeMatch = when (f.taskType) {
+                TaskTypeFilter.ALL -> true
+                TaskTypeFilter.EXAM -> task is Exam
+                TaskTypeFilter.TASK -> task is Task
+            }
+
+            // ---------------- DATE ----------------
             val dateMatch =
-                (f.fromDate == null || task.dueDate >= f.fromDate) &&
-                        (f.toDate == null || task.dueDate <= f.toDate)
+                (f.fromDate == null || !task.dueDate.isBefore(f.fromDate)) &&
+                        (f.toDate == null || !task.dueDate.isAfter(f.toDate))
 
             statusMatch && subjectMatch && typeMatch && dateMatch
         }

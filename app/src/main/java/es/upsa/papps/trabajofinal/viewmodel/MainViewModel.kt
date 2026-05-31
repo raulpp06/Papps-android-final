@@ -72,4 +72,8 @@ class MainViewModel : ViewModel() {
     fun updateFilters(newFilters: TaskFilters) {
         _uiState.value = _uiState.value.copy(activeTaskFilters = newFilters)
     }
+
+    fun clearFilters(newFilters: TaskFilters) {
+        _uiState.value = _uiState.value.copy(activeTaskFilters = TaskFilters())
+    }
 }

@@ -12,6 +12,7 @@ import es.upsa.papps.trabajofinal.ui.screens.subject.SubjectsScreen
 import es.upsa.papps.trabajofinal.ui.screens.task.TaskAddScreen
 import es.upsa.papps.trabajofinal.ui.screens.task.TaskDetailScreen
 import es.upsa.papps.trabajofinal.ui.screens.task.TaskEditScreen
+import es.upsa.papps.trabajofinal.ui.screens.task.TaskFilterScreen
 import es.upsa.papps.trabajofinal.ui.screens.task.TasksScreen
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 
@@ -30,7 +31,7 @@ fun AppNavigation(
         composable(Routes.SUBJECT_ADD) { SubjectAddScreen(navController, vm) }
         composable(Routes.TASKS) { TasksScreen(navController, vm) }
         composable(Routes.TASK_ADD) { TaskAddScreen(navController, vm) }
-        // composable(Routes.TASK_FILTER) { FilterTasksScreen(navController, vm) }
+        composable(Routes.TASK_FILTER) { TaskFilterScreen(navController, vm) }
 
         composable("${Routes.SUBJECT_DETAIL}/{id}") { backstack ->
 
