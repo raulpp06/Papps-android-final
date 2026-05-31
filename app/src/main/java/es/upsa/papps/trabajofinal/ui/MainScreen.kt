@@ -3,9 +3,7 @@ package es.upsa.papps.trabajofinal.ui
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -20,21 +18,18 @@ import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 
 @Composable
 fun MainScreen(vm: MainViewModel) {
-
     val navController = rememberNavController()
 
     Scaffold(
-
         bottomBar = {
             NavigationBar {
-
                 NavigationBarItem(
                     selected = false,
                     onClick = {
                         navController.navigate(Routes.SUBJECTS)
                     },
                     label = { Text("Asignaturas") },
-                    icon = { Icon(Icons.AutoMirrored.Filled.List, null) }
+                    icon = { Icon(Icons.AutoMirrored.Filled.List, null) },
                 )
 
                 NavigationBarItem(
@@ -43,20 +38,15 @@ fun MainScreen(vm: MainViewModel) {
                         navController.navigate(Routes.TASKS)
                     },
                     label = { Text("Tareas") },
-                    icon = { Icon(Icons.Default.Menu, null) }
+                    icon = { Icon(Icons.Default.Menu, null) },
                 )
-
             }
-        }
-
+        },
     ) { padding ->
-
         AppNavigation(
             navController = navController,
             vm = vm,
-            modifier = Modifier.padding(padding)
+            modifier = Modifier.padding(padding),
         )
-
     }
-
 }

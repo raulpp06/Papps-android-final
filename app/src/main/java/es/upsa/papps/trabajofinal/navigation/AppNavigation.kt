@@ -11,6 +11,8 @@ import es.upsa.papps.trabajofinal.ui.screens.add.AddSubjectScreen
 import es.upsa.papps.trabajofinal.ui.screens.add.AddTaskScreen
 import es.upsa.papps.trabajofinal.ui.screens.detail.SubjectDetailScreen
 import es.upsa.papps.trabajofinal.ui.screens.detail.TaskDetailScreen
+import es.upsa.papps.trabajofinal.ui.screens.edit.SubjectEditScreen
+import es.upsa.papps.trabajofinal.ui.screens.edit.TaskEditScreen
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 
 @Composable
@@ -24,7 +26,6 @@ fun AppNavigation(
         startDestination = Routes.SUBJECTS,
         modifier = modifier,
     ) {
-
         composable(Routes.SUBJECTS) { SubjectsScreen(navController, vm) }
         composable(Routes.SUBJECT_ADD) { AddSubjectScreen(navController, vm) }
         composable(Routes.TASKS) { TaskScreen(navController, vm) }
@@ -34,19 +35,32 @@ fun AppNavigation(
 
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
             if (id != null) {
-                SubjectDetailScreen(id, vm)
+                SubjectDetailScreen(navController, id, vm)
             }
+        }
 
+        composable("${Routes.SUBJECT_EDIT}/{id}") { backstack ->
+
+            val id = backstack.arguments?.getString("id")?.toIntOrNull()
+            if (id != null) {
+                SubjectEditScreen(navController, id, vm)
+            }
         }
 
         composable("${Routes.TASK_DETAIL}/{id}") { backstack ->
 
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
             if (id != null) {
-                TaskDetailScreen(id, vm)
+                TaskDetailScreen(navController, id, vm)
             }
-
         }
 
+        composable("${Routes.TASK_EDIT}/{id}") { backstack ->
+
+            val id = backstack.arguments?.getString("id")?.toIntOrNull()
+            if (id != null) {
+                TaskEditScreen(navController, id, vm)
+            }
+        }
     }
 }

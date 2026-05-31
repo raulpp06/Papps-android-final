@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.spotless)
 }
 
 android {
@@ -38,14 +37,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-}
-
-spotless {
-    lineEndings = com.diffplug.spotless.LineEnding.UNIX
-    kotlin {
-        ktlint()
-        trimTrailingWhitespace()
     }
 }
 

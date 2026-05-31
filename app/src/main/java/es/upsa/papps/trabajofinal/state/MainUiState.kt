@@ -8,7 +8,5 @@ data class MainUiState(
     val tasks: List<TaskBase>,
 ) {
     // Si añado propiedades no olvidar
-    fun isEmpty(): Boolean {
-        return subjects.isEmpty() && tasks.isEmpty()
-    }
+    fun isEmpty(): Boolean = subjects.isEmpty() && tasks.isEmpty()
 }

@@ -41,19 +41,19 @@ fun TaskScreen(
                     IconButton(
                         onClick = {
                             navController.navigate(Routes.TASK_ADD)
-                        }
+                        },
                     ) {
                         Icon(
                             imageVector = Icons.Default.Add,
-                            contentDescription = "Añadir tarea"
+                            contentDescription = "Añadir tarea",
                         )
                     }
-                }
+                },
             )
-        }
+        },
     ) { padding ->
         LazyColumn(
-            contentPadding = padding
+            contentPadding = padding,
         ) {
             items(state.tasks) { task ->
                 Card(
@@ -62,10 +62,10 @@ fun TaskScreen(
                         .padding(8.dp)
                         .clickable {
                             navController.navigate("${Routes.TASK_DETAIL}/${task.id}")
-                        }
+                        },
                 ) {
                     Column(
-                        Modifier.padding(16.dp)
+                        Modifier.padding(16.dp),
                     ) {
                         Text(
                             text = task.title,

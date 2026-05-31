@@ -4,5 +4,5 @@ data class Subject(
     val id: Int,
     val name: String,
     val teacher: String,
-    val credits: Int
+    val credits: Int,
 )

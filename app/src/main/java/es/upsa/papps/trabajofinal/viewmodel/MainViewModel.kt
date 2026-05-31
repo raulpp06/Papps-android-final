@@ -8,13 +8,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class MainViewModel : ViewModel() {
-
-    private val _uiState = MutableStateFlow(
-        MainUiState(
-            subjects = listOf(),
-            tasks = listOf()
+    private val _uiState =
+        MutableStateFlow(
+            MainUiState(
+                subjects = listOf(),
+                tasks = listOf(),
+            ),
         )
-    )
 
     val uiState: StateFlow<MainUiState> = _uiState
 
@@ -24,10 +24,14 @@ class MainViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(tasks = updated)
     }
 
-    fun modifyTask(id: Int, task: TaskBase) {
-        val updated = _uiState.value.tasks.map {
-            if (it.id == id) task else it
-        }
+    fun modifyTask(
+        id: Int,
+        task: TaskBase,
+    ) {
+        val updated =
+            _uiState.value.tasks.map {
+                if (it.id == id) task else it
+            }
 
         _uiState.value = _uiState.value.copy(tasks = updated)
     }
@@ -38,10 +42,14 @@ class MainViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(subjects = updated)
     }
 
-    fun modifySubject(id: Int, subject: Subject) {
-        val updated = _uiState.value.subjects.map {
-            if (it.id == id) subject else it
-        }
+    fun modifySubject(
+        id: Int,
+        subject: Subject,
+    ) {
+        val updated =
+            _uiState.value.subjects.map {
+                if (it.id == id) subject else it
+            }
 
         _uiState.value = _uiState.value.copy(subjects = updated)
     }

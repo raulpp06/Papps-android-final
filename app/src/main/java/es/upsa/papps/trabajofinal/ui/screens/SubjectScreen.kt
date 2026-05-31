@@ -41,19 +41,19 @@ fun SubjectsScreen(
                     IconButton(
                         onClick = {
                             navController.navigate(Routes.SUBJECT_ADD)
-                        }
+                        },
                     ) {
                         Icon(
                             imageVector = Icons.Default.Add,
-                            contentDescription = "Añadir asignatura"
+                            contentDescription = "Añadir asignatura",
                         )
                     }
-                }
+                },
             )
-        }
+        },
     ) { padding ->
         LazyColumn(
-            contentPadding = padding
+            contentPadding = padding,
         ) {
             items(state.subjects) { subject ->
                 Card(
@@ -62,10 +62,10 @@ fun SubjectsScreen(
                         .padding(8.dp)
                         .clickable {
                             navController.navigate("${Routes.SUBJECT_DETAIL}/${subject.id}")
-                        }
+                        },
                 ) {
                     Column(
-                        Modifier.padding(16.dp)
+                        Modifier.padding(16.dp),
                     ) {
                         Text(
                             text = subject.name,
