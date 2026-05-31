@@ -30,7 +30,7 @@ fun AppNavigation(
         composable(Routes.SUBJECT_ADD) { SubjectAddScreen(navController, vm) }
         composable(Routes.TASKS) { TasksScreen(navController, vm) }
         composable(Routes.TASK_ADD) { TaskAddScreen(navController, vm) }
-        composable(Routes.TASK_FILTER) { FilterTasksScreen(navController, vm) }
+        // composable(Routes.TASK_FILTER) { FilterTasksScreen(navController, vm) }
 
         composable("${Routes.SUBJECT_DETAIL}/{id}") { backstack ->
 

@@ -34,8 +34,8 @@ fun TaskEditScreen(
         subjectId = editVm.subjectId,
         onSubjectSelected = { editVm.subjectId = it },
 
-        dueDate = editVm.dueDate,
-        onDueDateChange = { editVm.dueDate = it },
+        dueDate = editVm.dueDateText,
+        onDueDateChange = { editVm.dueDateText = it },
 
         isExam = editVm.isExam,
         onExamToggle = { editVm.isExam = it },
@@ -43,8 +43,8 @@ fun TaskEditScreen(
         examRoom = editVm.examRoom,
         onExamRoomChange = { editVm.examRoom = it },
 
-        examHour = editVm.examHour,
-        onExamHourChange = { editVm.examHour = it },
+        examHour = editVm.examHourText,
+        onExamHourChange = { editVm.examHourText = it },
 
         gradePercent = editVm.gradePercent,
         onGradePercentChange = { editVm.gradePercent = it },
@@ -61,10 +61,10 @@ fun TaskEditScreen(
                     id = id,
                     subjectId = subjectId!!, // nunca es null por el isValid
                     title = editVm.title,
-                    dueDate = editVm.dueDate,
+                    dueDate = editVm.dueDate!!, // nunca es null por el isValid
                     isCompleted = (task as? Exam)?.isCompleted ?: false,
                     examRoom = editVm.examRoom,
-                    examHour = editVm.examHour,
+                    examHour = editVm.examHour!!, // nunca es null por el isValid
                     gradePercent = editVm.gradePercent.toFloat()
                 )
             } else {
@@ -72,7 +72,7 @@ fun TaskEditScreen(
                     id = id,
                     subjectId = subjectId,
                     title = editVm.title,
-                    dueDate = editVm.dueDate,
+                    dueDate = editVm.dueDate!!, // nunca es null por el isValid
                     isCompleted = task.isCompleted
                 )
             }

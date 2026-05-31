@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import es.upsa.papps.trabajofinal.model.data.Subject
+import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,6 +51,14 @@ fun AbstractTaskForm(
     var expanded by remember { mutableStateOf(false) }
 
     val selectedSubject = subjects.find { it.id == subjectId }
+
+    val showDateError =
+        dueDate.isNotBlank() && runCatching { LocalDate.parse(dueDate) }.isFailure
+
+    val showHourError =
+        isExam &&
+                examHour.isNotBlank() &&
+                runCatching { java.time.LocalTime.parse(examHour) }.isFailure
 
     Column(Modifier.padding(16.dp)) {
         // TITLE
@@ -107,6 +116,12 @@ fun AbstractTaskForm(
             value = dueDate,
             onValueChange = onDueDateChange,
             label = { Text("Fecha (YYYY-MM-DD)") },
+            isError = showDateError,
+            supportingText = {
+                if (showDateError) {
+                    Text("Fecha inválida")
+                }
+            }
         )
 
         Spacer(Modifier.height(16.dp))
@@ -159,7 +174,13 @@ fun AbstractTaskForm(
             OutlinedTextField(
                 value = examHour,
                 onValueChange = onExamHourChange,
-                label = { Text("Hora") },
+                label = { Text("Hora (HH:MM)") },
+                isError = showHourError,
+                supportingText = {
+                    if (showHourError) {
+                        Text("Hora inválida (usa HH:MM)")
+                    }
+                }
             )
 
             Spacer(Modifier.height(8.dp))
@@ -173,9 +194,14 @@ fun AbstractTaskForm(
 
         Spacer(Modifier.height(20.dp))
 
+        val canSubmit =
+            enabled &&
+                    !showDateError &&
+                    (!isExam || !showHourError)
+
         Button(
             onClick = onSubmit,
-            enabled = enabled,
+            enabled = canSubmit,
         ) {
             Text(submitText)
         }

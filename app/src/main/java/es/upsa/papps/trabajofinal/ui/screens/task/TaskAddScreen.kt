@@ -9,6 +9,8 @@ import es.upsa.papps.trabajofinal.model.data.Task
 import es.upsa.papps.trabajofinal.navigation.Routes
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 import es.upsa.papps.trabajofinal.viewmodel.TaskFormViewModel
+import java.time.LocalDate
+import java.time.LocalTime
 
 @Composable
 fun TaskAddScreen(
@@ -26,8 +28,8 @@ fun TaskAddScreen(
         subjectId = addVm.subjectId,
         onSubjectSelected = { addVm.subjectId = it },
 
-        dueDate = addVm.dueDate,
-        onDueDateChange = { addVm.dueDate = it },
+        dueDate = addVm.dueDateText,
+        onDueDateChange = { addVm.dueDateText = it },
 
         isExam = addVm.isExam,
         onExamToggle = { addVm.isExam = it },
@@ -35,8 +37,8 @@ fun TaskAddScreen(
         examRoom = addVm.examRoom,
         onExamRoomChange = { addVm.examRoom = it },
 
-        examHour = addVm.examHour,
-        onExamHourChange = { addVm.examHour = it },
+        examHour = addVm.examHourText,
+        onExamHourChange = { addVm.examHourText = it },
 
         gradePercent = addVm.gradePercent,
         onGradePercentChange = { addVm.gradePercent = it },
@@ -45,26 +47,26 @@ fun TaskAddScreen(
         submitText = "Añadir",
 
         onSubmit = {
-
-            val subjectId = addVm.subjectId
-
             val task = if (addVm.isExam) {
+
                 Exam(
                     id = vm.uiState.value.tasks.size + 1,
-                    subjectId = subjectId!!, // nunca es null for el isValid
+                    subjectId = addVm.subjectId!!, // nunca sera null por isValid check
                     title = addVm.title,
-                    dueDate = addVm.dueDate,
+                    dueDate = addVm.dueDate!!, // nunca sera null por isValid check
                     isCompleted = false,
                     examRoom = addVm.examRoom,
-                    examHour = addVm.examHour,
+                    examHour = addVm.examHour!!, // nunca sera null por isValid check
                     gradePercent = addVm.gradePercent.toFloat()
                 )
+
             } else {
+
                 Task(
                     id = vm.uiState.value.tasks.size + 1,
-                    subjectId = subjectId,
+                    subjectId = addVm.subjectId,
                     title = addVm.title,
-                    dueDate = addVm.dueDate,
+                    dueDate = addVm.dueDate!!, // nunca sera null por isValid check
                     isCompleted = false
                 )
             }
