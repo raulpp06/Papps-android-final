@@ -1,4 +1,4 @@
-package es.upsa.papps.trabajofinal.ui.screens.util
+package es.upsa.papps.trabajofinal.ui.screens.task
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,7 +27,7 @@ import es.upsa.papps.trabajofinal.model.data.Subject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskForm(
+fun AbstractTaskForm(
     title: String,
     onTitleChange: (String) -> Unit,
     subjects: List<Subject>,

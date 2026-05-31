@@ -1,4 +1,4 @@
-package es.upsa.papps.trabajofinal.ui.screens
+package es.upsa.papps.trabajofinal.ui.screens.task
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -33,7 +33,7 @@ import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskScreen(
+fun TasksScreen(
     navController: NavController,
     vm: MainViewModel,
 ) {
@@ -61,7 +61,7 @@ fun TaskScreen(
         LazyColumn(
             contentPadding = padding,
         ) {
-            items(state.tasks) { task ->
+            items(state.filteredTasks) { task ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -69,7 +69,8 @@ fun TaskScreen(
                         .clickable {
                             navController.navigate("${Routes.TASK_DETAIL}/${task.id}")
                         },
-                    colors = if (task is Exam) CardDefaults.cardColors().copy(containerColor = Color.Red) else CardDefaults.cardColors() //TODO: color mejor
+                    colors = if (task is Exam) CardDefaults.cardColors()
+                        .copy(containerColor = Color.Red) else CardDefaults.cardColors() //TODO: color mejor
                 ) {
                     Row(
                         modifier = Modifier

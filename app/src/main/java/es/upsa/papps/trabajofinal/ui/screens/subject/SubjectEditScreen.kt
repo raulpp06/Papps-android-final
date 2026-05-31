@@ -1,4 +1,4 @@
-package es.upsa.papps.trabajofinal.ui.screens.edit
+package es.upsa.papps.trabajofinal.ui.screens.subject
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -8,7 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import es.upsa.papps.trabajofinal.model.data.Subject
-import es.upsa.papps.trabajofinal.ui.screens.util.SubjectForm
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 import es.upsa.papps.trabajofinal.viewmodel.SubjectFormViewModel
 
@@ -41,7 +40,7 @@ fun SubjectEditScreen(
         return
     }
 
-    SubjectForm(
+    AbstractSubjectForm(
         pageTitle = "Editar ${subject.name}",
         name = editVm.name,
         onNameChange = { editVm.name = it },

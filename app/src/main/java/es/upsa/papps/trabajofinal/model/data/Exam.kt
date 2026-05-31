@@ -10,17 +10,17 @@ data class Exam(
     override val id: Int,
     override val subjectId: Int,
     override val title: String,
-    override val dueDate: String,
+    override val dueDate: LocalDate,
     override val isCompleted: Boolean,
     val examRoom: String,
-    val examHour: String,
+    val examHour: LocalTime,
     val gradePercent: Float // de 0 a 1
 ) : TaskBase(id, subjectId, title, dueDate, isCompleted) {
     @RequiresApi(Build.VERSION_CODES.O)
     fun isFinished(): Boolean {
         val examDateTime = LocalDateTime.of(
-            LocalDate.parse(dueDate),
-            LocalTime.parse(examHour)
+            dueDate,
+            examHour
         )
 
         return LocalDateTime.now() > examDateTime

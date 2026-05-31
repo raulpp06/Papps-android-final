@@ -1,4 +1,4 @@
-package es.upsa.papps.trabajofinal.ui.screens.edit
+package es.upsa.papps.trabajofinal.ui.screens.task
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -8,7 +8,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import es.upsa.papps.trabajofinal.model.data.Exam
 import es.upsa.papps.trabajofinal.model.data.Task
-import es.upsa.papps.trabajofinal.ui.screens.util.TaskForm
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 import es.upsa.papps.trabajofinal.viewmodel.TaskFormViewModel
 
@@ -27,7 +26,7 @@ fun TaskEditScreen(
         editVm.load(task)
     }
 
-    TaskForm(
+    AbstractTaskForm(
         title = editVm.title,
         onTitleChange = { editVm.title = it },
 

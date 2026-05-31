@@ -1,21 +1,20 @@
-package es.upsa.papps.trabajofinal.ui.screens.add
+package es.upsa.papps.trabajofinal.ui.screens.subject
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import es.upsa.papps.trabajofinal.model.data.Subject
 import es.upsa.papps.trabajofinal.navigation.Routes
-import es.upsa.papps.trabajofinal.ui.screens.util.SubjectForm
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 import es.upsa.papps.trabajofinal.viewmodel.SubjectFormViewModel
 
 @Composable
-fun AddSubjectScreen(
+fun SubjectAddScreen(
     navController: NavController,
     vm: MainViewModel,
     addVm: SubjectFormViewModel = viewModel(),
 ) {
-    SubjectForm(
+    AbstractSubjectForm(
         pageTitle = "Nueva asignatura",
         name = addVm.name,
         onNameChange = { addVm.name = it },

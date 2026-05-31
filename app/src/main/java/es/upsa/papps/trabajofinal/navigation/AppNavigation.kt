@@ -5,14 +5,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import es.upsa.papps.trabajofinal.ui.screens.SubjectsScreen
-import es.upsa.papps.trabajofinal.ui.screens.TaskScreen
-import es.upsa.papps.trabajofinal.ui.screens.add.AddSubjectScreen
-import es.upsa.papps.trabajofinal.ui.screens.add.AddTaskScreen
-import es.upsa.papps.trabajofinal.ui.screens.detail.SubjectDetailScreen
-import es.upsa.papps.trabajofinal.ui.screens.detail.TaskDetailScreen
-import es.upsa.papps.trabajofinal.ui.screens.edit.SubjectEditScreen
-import es.upsa.papps.trabajofinal.ui.screens.edit.TaskEditScreen
+import es.upsa.papps.trabajofinal.ui.screens.subject.SubjectAddScreen
+import es.upsa.papps.trabajofinal.ui.screens.subject.SubjectDetailScreen
+import es.upsa.papps.trabajofinal.ui.screens.subject.SubjectEditScreen
+import es.upsa.papps.trabajofinal.ui.screens.subject.SubjectsScreen
+import es.upsa.papps.trabajofinal.ui.screens.task.TaskAddScreen
+import es.upsa.papps.trabajofinal.ui.screens.task.TaskDetailScreen
+import es.upsa.papps.trabajofinal.ui.screens.task.TaskEditScreen
+import es.upsa.papps.trabajofinal.ui.screens.task.TasksScreen
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 
 @Composable
@@ -27,9 +27,10 @@ fun AppNavigation(
         modifier = modifier,
     ) {
         composable(Routes.SUBJECTS) { SubjectsScreen(navController, vm) }
-        composable(Routes.SUBJECT_ADD) { AddSubjectScreen(navController, vm) }
-        composable(Routes.TASKS) { TaskScreen(navController, vm) }
-        composable(Routes.TASK_ADD) { AddTaskScreen(navController, vm) }
+        composable(Routes.SUBJECT_ADD) { SubjectAddScreen(navController, vm) }
+        composable(Routes.TASKS) { TasksScreen(navController, vm) }
+        composable(Routes.TASK_ADD) { TaskAddScreen(navController, vm) }
+        composable(Routes.TASK_FILTER) { FilterTasksScreen(navController, vm) }
 
         composable("${Routes.SUBJECT_DETAIL}/{id}") { backstack ->
 

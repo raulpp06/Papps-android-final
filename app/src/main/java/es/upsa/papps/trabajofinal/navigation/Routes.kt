@@ -10,4 +10,5 @@ object Routes {
     val TASK_DETAIL = "task_detail"
     val TASK_ADD = "task_add"
     val TASK_EDIT = "task_edit"
+    val TASK_FILTER = "task_filter"
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import es.upsa.papps.trabajofinal.model.data.Subject
 import es.upsa.papps.trabajofinal.model.data.Task
 import es.upsa.papps.trabajofinal.model.data.TaskBase
+import es.upsa.papps.trabajofinal.model.data.TaskFilters
 import es.upsa.papps.trabajofinal.state.MainUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,6 +15,7 @@ class MainViewModel : ViewModel() {
             MainUiState(
                 subjects = listOf(),
                 tasks = listOf(),
+                activeTaskFilters = TaskFilters(),
             ),
         )
 
@@ -65,5 +67,9 @@ class MainViewModel : ViewModel() {
             }
 
         _uiState.value = _uiState.value.copy(subjects = updated)
+    }
+
+    fun updateFilters(newFilters: TaskFilters) {
+        _uiState.value = _uiState.value.copy(activeTaskFilters = newFilters)
     }
 }

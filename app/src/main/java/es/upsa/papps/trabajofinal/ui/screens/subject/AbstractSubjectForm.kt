@@ -1,4 +1,4 @@
-package es.upsa.papps.trabajofinal.ui.screens.util
+package es.upsa.papps.trabajofinal.ui.screens.subject
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SubjectForm(
+fun AbstractSubjectForm(
     pageTitle: String,
     name: String,
     onNameChange: (String) -> Unit,

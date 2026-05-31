@@ -1,4 +1,4 @@
-package es.upsa.papps.trabajofinal.ui.screens.detail
+package es.upsa.papps.trabajofinal.ui.screens.task
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
