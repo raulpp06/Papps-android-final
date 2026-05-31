@@ -55,12 +55,12 @@ fun TaskEditScreen(
 
         onSubmit = {
 
-            val subjectId = editVm.subjectId ?: return@TaskForm
+            val subjectId = editVm.subjectId
 
             val updated = if (editVm.isExam) {
                 Exam(
                     id = id,
-                    subjectId = subjectId,
+                    subjectId = subjectId!!, // nunca es null por el isValid
                     title = editVm.title,
                     dueDate = editVm.dueDate,
                     isCompleted = (task as? Exam)?.isCompleted ?: false,

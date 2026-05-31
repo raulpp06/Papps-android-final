@@ -95,7 +95,7 @@ fun TaskDetailScreen(
 
                 is Task -> {
                     // NADA
-                    Text("Tarea normal (sin datos extra)") // TEST TODO: quitar para envio
+                    Text("Tarea normal (sin datos extra)") // para test TEST TODO: quitar para envio
                 }
             }
         }

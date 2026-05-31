@@ -2,6 +2,7 @@ package es.upsa.papps.trabajofinal.viewmodel
 
 import androidx.lifecycle.ViewModel
 import es.upsa.papps.trabajofinal.model.data.Subject
+import es.upsa.papps.trabajofinal.model.data.Task
 import es.upsa.papps.trabajofinal.model.data.TaskBase
 import es.upsa.papps.trabajofinal.state.MainUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,6 +35,18 @@ class MainViewModel : ViewModel() {
             }
 
         _uiState.value = _uiState.value.copy(tasks = updated)
+    }
+
+    fun toggleTask(id: Int) {
+        val task = _uiState.value.tasks.find { it.id == id } ?: return
+
+        val updated = if (task is Task) {
+            task.copy(isCompleted = !task.isCompleted)
+        } else {
+            return
+        }
+
+        modifyTask(id, updated)
     }
 
     fun addSubject(subject: Subject) {

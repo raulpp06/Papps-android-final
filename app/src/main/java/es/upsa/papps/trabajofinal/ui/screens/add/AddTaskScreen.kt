@@ -47,12 +47,12 @@ fun AddTaskScreen(
 
         onSubmit = {
 
-            val subjectId = addVm.subjectId ?: return@TaskForm
+            val subjectId = addVm.subjectId
 
             val task = if (addVm.isExam) {
                 Exam(
                     id = vm.uiState.value.tasks.size + 1,
-                    subjectId = subjectId,
+                    subjectId = subjectId!!, // nunca es null for el isValid
                     title = addVm.title,
                     dueDate = addVm.dueDate,
                     isCompleted = false,
