@@ -1,7 +1,5 @@
 package es.upsa.papps.trabajofinal.model.data
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -16,7 +14,6 @@ data class Exam(
     val examHour: LocalTime,
     val gradePercent: Float // de 0 a 1
 ) : TaskBase(id, subjectId, title, dueDate, isCompleted) {
-    @RequiresApi(Build.VERSION_CODES.O)
     fun isFinished(): Boolean {
         val examDateTime = LocalDateTime.of(
             dueDate,
