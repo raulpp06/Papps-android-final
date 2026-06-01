@@ -22,7 +22,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.model.data.Subject
 import es.upsa.papps.trabajofinal.ui.util.SubjectPickerField
 import java.time.LocalDate
@@ -49,10 +51,6 @@ fun AbstractTaskForm(
     submitText: String,
     enabled: Boolean,
 ) {
-    var expanded by remember { mutableStateOf(false) }
-
-    val selectedSubject = subjects.find { it.id == subjectId }
-
     val showDateError =
         dueDate.isNotBlank() && runCatching { LocalDate.parse(dueDate) }.isFailure
 
@@ -66,7 +64,7 @@ fun AbstractTaskForm(
         OutlinedTextField(
             value = title,
             onValueChange = onTitleChange,
-            label = { Text("Título") },
+            label = { Text(stringResource(R.string.ui_title)) },
         )
 
         Spacer(Modifier.height(12.dp))
@@ -84,11 +82,11 @@ fun AbstractTaskForm(
         OutlinedTextField(
             value = dueDate,
             onValueChange = onDueDateChange,
-            label = { Text("Fecha (YYYY-MM-DD)") },
+            label = { Text(stringResource(R.string.ui_date_format)) },
             isError = showDateError,
             supportingText = {
                 if (showDateError) {
-                    Text("Fecha inválida")
+                    Text(stringResource(R.string.ui_invalid_date))
                 }
             }
         )
@@ -108,7 +106,7 @@ fun AbstractTaskForm(
                     },
                 ),
             ) {
-                Text("Tarea")
+                Text(stringResource(R.string.ui_task))
             }
 
             Spacer(Modifier.width(8.dp))
@@ -124,7 +122,7 @@ fun AbstractTaskForm(
                     },
                 ),
             ) {
-                Text("Examen")
+                Text(stringResource(R.string.ui_exam))
             }
         }
 
@@ -135,7 +133,7 @@ fun AbstractTaskForm(
             OutlinedTextField(
                 value = examRoom,
                 onValueChange = onExamRoomChange,
-                label = { Text("Aula") },
+                label = { Text(stringResource(R.string.ui_room)) },
             )
 
             Spacer(Modifier.height(8.dp))
@@ -143,11 +141,11 @@ fun AbstractTaskForm(
             OutlinedTextField(
                 value = examHour,
                 onValueChange = onExamHourChange,
-                label = { Text("Hora (HH:MM)") },
+                label = { Text(stringResource(R.string.ui_hour_format)) },
                 isError = showHourError,
                 supportingText = {
                     if (showHourError) {
-                        Text("Hora inválida (usa HH:MM)")
+                        Text(stringResource(R.string.ui_invalid_hour))
                     }
                 }
             )
@@ -157,16 +155,13 @@ fun AbstractTaskForm(
             OutlinedTextField(
                 value = gradePercent,
                 onValueChange = onGradePercentChange,
-                label = { Text("Peso (0-1)") },
+                label = { Text(stringResource(R.string.ui_grade_weight)) },
             )
         }
 
         Spacer(Modifier.height(20.dp))
 
-        val canSubmit =
-            enabled &&
-                    !showDateError &&
-                    (!isExam || !showHourError)
+        val canSubmit = enabled && !showDateError && (!isExam || !showHourError)
 
         Button(
             onClick = onSubmit,

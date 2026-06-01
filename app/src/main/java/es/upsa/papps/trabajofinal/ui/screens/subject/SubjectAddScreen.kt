@@ -1,8 +1,10 @@
 package es.upsa.papps.trabajofinal.ui.screens.subject
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.model.data.Subject
 import es.upsa.papps.trabajofinal.navigation.Routes
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
@@ -15,7 +17,7 @@ fun SubjectAddScreen(
     addVm: SubjectFormViewModel = viewModel(),
 ) {
     AbstractSubjectForm(
-        pageTitle = "Nueva asignatura",
+        pageTitle = stringResource(R.string.ui_new_subject),
         name = addVm.name,
         onNameChange = { addVm.name = it },
         teacher = addVm.teacher,
@@ -23,7 +25,7 @@ fun SubjectAddScreen(
         credits = addVm.credits,
         onCreditsChange = { addVm.credits = it },
         enabled = addVm.isValid(),
-        submitText = "Añadir",
+        submitText = stringResource(R.string.ui_add),
         onSubmit = {
             vm.addSubject(
                 Subject(

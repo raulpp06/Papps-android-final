@@ -15,7 +15,7 @@ import es.upsa.papps.trabajofinal.ui.screens.subject.SubjectsScreen
 import es.upsa.papps.trabajofinal.ui.screens.task.TaskAddScreen
 import es.upsa.papps.trabajofinal.ui.screens.task.TaskDetailScreen
 import es.upsa.papps.trabajofinal.ui.screens.task.TaskEditScreen
-import es.upsa.papps.trabajofinal.ui.screens.task.TaskFilterScreen
+import es.upsa.papps.trabajofinal.ui.screens.task.TaskFilterSheetContent
 import es.upsa.papps.trabajofinal.ui.screens.task.TasksScreen
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 
@@ -59,14 +59,6 @@ fun AppNavigation(
         ) { TaskAddScreen(navController, vm) }
 
         composable(
-            Routes.TASK_FILTER,
-            enterTransition = { slideUpEnter },
-            exitTransition = { slideDownExit },
-            popEnterTransition = { null },
-            popExitTransition = { slideDownExit },
-        ) { TaskFilterScreen(navController, vm) }
-
-        composable(
             "${Routes.SUBJECT_DETAIL}/{id}",
             enterTransition = { slideUpEnter },
             exitTransition = { slideDownExit },
@@ -79,10 +71,6 @@ fun AppNavigation(
 
         composable(
             "${Routes.SUBJECT_EDIT}/{id}",
-            enterTransition = { slideUpEnter },
-            exitTransition = { slideDownExit },
-            popEnterTransition = { null },
-            popExitTransition = { slideDownExit },
         ) { backstack ->
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
             if (id != null) SubjectEditScreen(navController, id, vm)
@@ -101,10 +89,6 @@ fun AppNavigation(
 
         composable(
             "${Routes.TASK_EDIT}/{id}",
-            enterTransition = { slideUpEnter },
-            exitTransition = { slideDownExit },
-            popEnterTransition = { null },
-            popExitTransition = { slideDownExit },
         ) { backstack ->
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
             if (id != null) TaskEditScreen(navController, id, vm)

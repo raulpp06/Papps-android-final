@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">TrabajoFinal</string>
+
+    <!-- General -->
+    <string name="ui_add">Añadir</string>
+    <string name="ui_save">Guardar</string>
+    <string name="ui_all">Todas</string>
+    <string name="ui_name">Nombre</string>
+
+    <!-- Formulario asignatura -->
+    <string name="ui_profesor">Profesor</string>
+    <string name="ui_credits">Créditos</string>
+    <string name="ui_error_positive_number">Introduce un número positivo</string>
+    <string name="ui_new_subject">Nueva Asignatura</string>
+
+    <!-- Asignaturas -->
+    <string name="ui_subjects">Asignaturas</string>
+    <string name="ui_add_subject">Añadir asignatura</string>
+    <string name="ui_edit_subject">Editar asignatura</string>
+    <string name="ui_edit_subject_title">Editar %1$s</string>
+    <string name="ui_delete_subject">Borrar asignatura</string>
+    <string name="ui_subject_not_found">Asignatura no encontrada</string>
+    <string name="ui_credits_label">Créditos: %1$s</string>
+    <string name="ui_all_subjects">Todas las asignaturas</string>
+    <string name="ui_no_subject">Sin asignatura</string>
+    <string name="ui_tasks_and_exams">Tareas y exámenes</string>
+    <string name="ui_no_tasks">No hay tareas asociadas</string>
+
+    <!-- Tareas -->
+    <string name="ui_task">Tarea</string>
+    <string name="ui_type_tasks">Tareas</string>
+    <string name="ui_add_task">Añadir tarea</string>
+    <string name="ui_filter_tasks">Filtrar tareas</string>
+    <string name="ui_task_not_found">Tarea no encontrada</string>
+    <string name="ui_edit_task">Editar tarea</string>
+    <string name="ui_delete_task">Borrar tarea</string>
+    <string name="ui_task_detail">Detalle de Tarea</string>
+    <string name="ui_task_normal">Tarea normal (sin datos extra)</string>
+
+    <!-- Exámenes -->
+    <string name="ui_exam">Examen</string>
+    <string name="ui_type_exams">Exámenes</string>
+    <string name="ui_exam_detail">Detalle de Examen</string>
+    <string name="ui_room">Aula</string>
+
+    <!-- Etiquetas de detalle -->
+    <string name="ui_title">Título</string>
+    <string name="ui_name_label">Nombre: %1$s</string>
+    <string name="ui_due_date_label">Fecha fin: %1$s</string>
+    <string name="ui_task_due_date">%1$s (%2$s)</string>
+    <string name="ui_room_label">Aula: %1$s</string>
+    <string name="ui_hour_label">Hora: %1$s</string>
+    <string name="ui_weight_label">Peso: %1$s</string>
+
+    <!-- Formulario tarea -->
+    <string name="ui_date_format">Fecha (YYYY-MM-DD)</string>
+    <string name="ui_invalid_date">Fecha inválida</string>
+    <string name="ui_hour_format">Hora (HH:MM)</string>
+    <string name="ui_invalid_hour">Hora inválida (usa HH:MM)</string>
+    <string name="ui_grade_weight">Peso (0–1)</string>
+
+    <!-- Filtros -->
+    <string name="ui_filters">Filtros</string>
+    <string name="ui_type_all">Todas</string>
+    <string name="ui_status">Estado</string>
+    <string name="ui_status_all">Todas</string>
+    <string name="ui_status_completed">Completadas</string>
+    <string name="ui_status_pending">Sin completar</string>
+    <string name="ui_task_type">Tipo de tarea</string>
+    <string name="ui_date_from">Desde</string>
+    <string name="ui_date_to">Hasta</string>
+    <string name="ui_apply_filters">Aplicar filtros</string>
+</resources>

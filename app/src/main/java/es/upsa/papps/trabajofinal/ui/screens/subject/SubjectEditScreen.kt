@@ -5,8 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.model.data.Subject
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 import es.upsa.papps.trabajofinal.viewmodel.SubjectFormViewModel
@@ -19,29 +21,21 @@ fun SubjectEditScreen(
     editVm: SubjectFormViewModel = viewModel(),
 ) {
     val state by vm.uiState.collectAsState()
-
     val subject = state.subjects.find { it.id == id }
-
-    println("EDIT + subjects size = ${state.subjects.size}")
-    println("EDIT + looking for id = $id")
-    println("EDIT + subject = $subject")
 
     LaunchedEffect(subject?.id) {
         if (subject != null) {
             editVm.loadSubject(subject)
-            println("EDIT + name = ${editVm.name}")
-            println("EDIT + teacher = ${editVm.teacher}")
-            println("EDIT + credits = ${editVm.credits}")
         }
     }
 
     if (subject == null) {
-        Text("Asignatura no encontrada")
+        Text(stringResource(R.string.ui_subject_not_found))
         return
     }
 
     AbstractSubjectForm(
-        pageTitle = "Editar ${subject.name}",
+        pageTitle = stringResource(R.string.ui_edit_subject_title, subject.name),
         name = editVm.name,
         onNameChange = { editVm.name = it },
         teacher = editVm.teacher,
@@ -49,7 +43,7 @@ fun SubjectEditScreen(
         credits = editVm.credits,
         onCreditsChange = { editVm.credits = it },
         enabled = editVm.isValid(),
-        submitText = "Guardar",
+        submitText = stringResource(R.string.ui_save),
         onSubmit = {
             vm.modifySubject(
                 id,
@@ -60,7 +54,6 @@ fun SubjectEditScreen(
                     credits = editVm.credits.toInt(),
                 ),
             )
-
             navController.popBackStack()
         },
     )

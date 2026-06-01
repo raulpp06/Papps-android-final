@@ -12,7 +12,7 @@ Las características que debe cumplir **OBLIGATORIAMENTE** la aplicación son la
 - Mostrar al menos una lista utilizando LazyColumn [HECHO]
 - Uso de componentes Material3 [HECHO]
 - Manejo de eventos de usuario (clicks, cambios de estado, etc.) [NO SE]
-- Internacionalizar la aplicación (al menos en Español e Inglés) [NO]
+- Internacionalizar la aplicación (al menos en Español e Inglés) [HECHO]
 
 Calificación:
 
@@ -28,7 +28,7 @@ Calificación:
 - **Sobresaliente**: Sólo se podrá optar a la calificación Sobresaliente si se ha superado la parte correspondiente al notable. Además, la aplicación deberá incluir al menos cinco funcionalidades avanzadas adicionales, tales como:
 * CRUD completo de datos persistentes [SI, FALTA ROOM]
 * Pantallas de detalle con navegación mediante múltiples parámetros [HECHO]
-* Uso de componentes modales [NO SE]
+* Uso de componentes modales [SI]
 * Gestión avanzada del estado [NO SE]
 * Formularios con validación de datos [HECHO]
 * Implementación de búsqueda o filtrado de datos [POR HACER]

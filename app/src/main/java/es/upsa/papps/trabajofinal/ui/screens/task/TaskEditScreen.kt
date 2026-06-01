@@ -4,8 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.model.data.Exam
 import es.upsa.papps.trabajofinal.model.data.Task
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
@@ -50,7 +52,7 @@ fun TaskEditScreen(
         onGradePercentChange = { editVm.gradePercent = it },
 
         enabled = editVm.isValid(),
-        submitText = "Guardar",
+        submitText = stringResource(R.string.ui_save),
 
         onSubmit = {
 

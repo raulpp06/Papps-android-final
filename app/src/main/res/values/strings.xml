@@ -1,3 +1,73 @@
 <resources>
-    <string name="app_name">TrabajoFinal</string>
+    <string name="app_name">FinalTask</string>
+
+    <!-- General -->
+    <string name="ui_add">Add</string>
+    <string name="ui_save">Save</string>
+    <string name="ui_all">All</string>
+    <string name="ui_name">Name</string>
+
+    <!-- Subject form -->
+    <string name="ui_profesor">Teacher</string>
+    <string name="ui_credits">Credits</string>
+    <string name="ui_error_positive_number">Enter a positive number</string>
+    <string name="ui_new_subject">New subject</string>
+
+    <!-- Subjects -->
+    <string name="ui_subjects">Subjects</string>
+    <string name="ui_add_subject">Add subject</string>
+    <string name="ui_edit_subject">Edit subject</string>
+    <string name="ui_edit_subject_title">Edit %1$s</string>
+    <string name="ui_delete_subject">Delete subject</string>
+    <string name="ui_subject_not_found">Subject not found</string>
+    <string name="ui_credits_label">Credits: %1$s</string>
+    <string name="ui_all_subjects">All subjects</string>
+    <string name="ui_no_subject">No subject</string>
+    <string name="ui_tasks_and_exams">Tasks and exams</string>
+    <string name="ui_no_tasks">No associated tasks</string>
+
+    <!-- Tasks -->
+    <string name="ui_task">Task</string>
+    <string name="ui_type_tasks">Tasks</string>
+    <string name="ui_add_task">Add task</string>
+    <string name="ui_filter_tasks">Filter tasks</string>
+    <string name="ui_task_not_found">Task not found</string>
+    <string name="ui_edit_task">Edit task</string>
+    <string name="ui_delete_task">Delete task</string>
+    <string name="ui_task_detail">Task detail</string>
+    <string name="ui_task_normal">Normal task (no extra data)</string>
+
+    <!-- Exams -->
+    <string name="ui_exam">Exam</string>
+    <string name="ui_type_exams">Exams</string>
+    <string name="ui_exam_detail">Exam detail</string>
+    <string name="ui_room">Room</string>
+
+    <!-- Detail labels -->
+    <string name="ui_title">Title</string>
+    <string name="ui_name_label">Name: %1$s</string>
+    <string name="ui_due_date_label">Due date: %1$s</string>
+    <string name="ui_task_due_date">%1$s (%2$s)</string>
+    <string name="ui_room_label">Room: %1$s</string>
+    <string name="ui_hour_label">Time: %1$s</string>
+    <string name="ui_weight_label">Weight: %1$s</string>
+
+    <!-- Task form -->
+    <string name="ui_date_format">Date (YYYY-MM-DD)</string>
+    <string name="ui_invalid_date">Invalid date</string>
+    <string name="ui_hour_format">Time (HH:MM)</string>
+    <string name="ui_invalid_hour">Invalid time (use HH:MM)</string>
+    <string name="ui_grade_weight">Weight (0–1)</string>
+
+    <!-- Filters -->
+    <string name="ui_filters">Filters</string>
+    <string name="ui_type_all">All</string>
+    <string name="ui_status">Status</string>
+    <string name="ui_status_all">All</string>
+    <string name="ui_status_completed">Completed</string>
+    <string name="ui_status_pending">Pending</string>
+    <string name="ui_task_type">Task type</string>
+    <string name="ui_date_from">From</string>
+    <string name="ui_date_to">Until</string>
+    <string name="ui_apply_filters">Apply filters</string>
 </resources>

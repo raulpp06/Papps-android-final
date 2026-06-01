@@ -12,7 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import es.upsa.papps.trabajofinal.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,7 +45,7 @@ fun AbstractSubjectForm(
             OutlinedTextField(
                 value = name,
                 onValueChange = onNameChange,
-                label = { Text("Nombre") },
+                label = { Text(stringResource(R.string.ui_name)) },
             )
 
             Spacer(Modifier.height(8.dp))
@@ -51,7 +53,7 @@ fun AbstractSubjectForm(
             OutlinedTextField(
                 value = teacher,
                 onValueChange = onTeacherChange,
-                label = { Text("Profesor") },
+                label = { Text(stringResource(R.string.ui_profesor)) },
             )
 
             Spacer(Modifier.height(8.dp))
@@ -65,10 +67,10 @@ fun AbstractSubjectForm(
                 isError = showError,
                 supportingText = {
                     if (showError) {
-                        Text("Introduce un número positivo")
+                        Text(stringResource(R.string.ui_error_positive_number))
                     }
                 },
-                label = { Text("Créditos") },
+                label = { Text(stringResource(R.string.ui_credits)) },
             )
 
             Spacer(Modifier.height(8.dp))

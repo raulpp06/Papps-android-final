@@ -17,17 +17,24 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.model.data.Exam
 import es.upsa.papps.trabajofinal.navigation.Routes
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
@@ -39,20 +46,22 @@ fun TasksScreen(
     vm: MainViewModel,
 ) {
     val state by vm.uiState.collectAsState()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    var showFilters by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Tareas") },
+                title = { Text(stringResource(R.string.ui_type_tasks)) },
                 actions = {
                     IconButton(
                         onClick = {
-                            navController.navigate(Routes.TASK_FILTER)
-                        },
+                            showFilters = true
+                        }
                     ) {
                         Icon(
                             imageVector = Icons.Default.FilterAlt,
-                            contentDescription = "Filtrar tareas",
+                            contentDescription = stringResource(R.string.ui_filter_tasks),
                         )
                     }
                     IconButton(
@@ -62,7 +71,7 @@ fun TasksScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Add,
-                            contentDescription = "Añadir tarea",
+                            contentDescription = stringResource(R.string.ui_add_task),
                         )
                     }
                 },
@@ -81,7 +90,7 @@ fun TasksScreen(
                             navController.navigate("${Routes.TASK_DETAIL}/${task.id}")
                         },
                     colors = if (task is Exam) CardDefaults.cardColors()
-                        .copy(containerColor = Color.Red) else CardDefaults.cardColors() //TODO: color mejor
+                        .copy(containerColor = Color.Red) else CardDefaults.cardColors()
                 ) {
                     Row(
                         modifier = Modifier
@@ -89,7 +98,6 @@ fun TasksScreen(
                             .padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-
                         Column(
                             modifier = Modifier.weight(1f)
                         ) {
@@ -97,7 +105,7 @@ fun TasksScreen(
                                 text = task.title,
                                 style = MaterialTheme.typography.titleMedium,
                             )
-                            Text("Fecha fin: ${task.dueDate}")
+                            Text(stringResource(R.string.ui_due_date_label, task.dueDate))
                         }
 
                         if (task !is Exam) {
@@ -110,6 +118,19 @@ fun TasksScreen(
                         }
                     }
                 }
+            }
+        }
+
+
+        if (showFilters) {
+            ModalBottomSheet(
+                onDismissRequest = { showFilters = false },
+                sheetState = sheetState,
+            ) {
+                TaskFilterSheetContent(
+                    vm = vm,
+                    onApply = { showFilters = false }
+                )
             }
         }
     }

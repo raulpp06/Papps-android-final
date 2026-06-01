@@ -18,8 +18,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.model.data.Exam
 import es.upsa.papps.trabajofinal.model.data.Task
 import es.upsa.papps.trabajofinal.navigation.Routes
@@ -33,15 +35,13 @@ fun TaskDetailScreen(
     vm: MainViewModel,
 ) {
     val state by vm.uiState.collectAsState()
-
     val task = state.tasks.find { it.id == id }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    val texto = task?.title ?: "Tarea no encontrada"
-                    Text(texto)
+                    Text(task?.title ?: stringResource(R.string.ui_task_not_found))
                 },
                 actions = {
                     IconButton(
@@ -51,7 +51,7 @@ fun TaskDetailScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Edit,
-                            contentDescription = "Editar tarea",
+                            contentDescription = stringResource(R.string.ui_edit_task),
                         )
                     }
                     IconButton(
@@ -62,7 +62,7 @@ fun TaskDetailScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Borrar tarea",
+                            contentDescription = stringResource(R.string.ui_delete_task),
                         )
                     }
                 },
@@ -75,35 +75,33 @@ fun TaskDetailScreen(
                 .padding(padding),
         ) {
             if (task == null) {
-                Text("Tarea no encontrada")
+                Text(stringResource(R.string.ui_task_not_found))
                 return@Column
             }
 
             Text(
                 text = when (task) {
-                    is Exam -> "Detalle de Examen"
-                    is Task -> "Detalle de Tarea"
+                    is Exam -> stringResource(R.string.ui_exam_detail)
+                    is Task -> stringResource(R.string.ui_task_detail)
                 },
                 style = MaterialTheme.typography.titleLarge,
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text("Nombre: ${task.title}")
-            Text("Fecha fin: ${task.dueDate}")
+            Text(stringResource(R.string.ui_name_label, task.title))
+            Text(stringResource(R.string.ui_due_date_label, task.dueDate))
 
             Spacer(modifier = Modifier.height(16.dp))
 
             when (task) {
                 is Exam -> {
-                    Text("Aula: ${task.examRoom}")
-                    Text("Hora: ${task.examHour}")
-                    Text("Peso: ${task.gradePercent}")
+                    Text(stringResource(R.string.ui_room_label, task.examRoom))
+                    Text(stringResource(R.string.ui_hour_label, task.examHour))
+                    Text(stringResource(R.string.ui_weight_label, task.gradePercent))
                 }
-
                 is Task -> {
-                    // NADA
-                    Text("Tarea normal (sin datos extra)") // para test TEST TODO: quitar para envio
+                    Text(stringResource(R.string.ui_task_normal))
                 }
             }
         }

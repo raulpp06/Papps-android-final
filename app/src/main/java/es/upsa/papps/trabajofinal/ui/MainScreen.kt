@@ -12,7 +12,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.rememberNavController
+import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.navigation.AppNavigation
 import es.upsa.papps.trabajofinal.navigation.Routes
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
@@ -29,7 +31,7 @@ fun MainScreen(vm: MainViewModel) {
                     onClick = {
                         navController.navigate(Routes.SUBJECTS)
                     },
-                    label = { Text("Asignaturas") },
+                    label = { Text(stringResource(R.string.ui_subjects)) },
                     icon = { Icon(Icons.AutoMirrored.Filled.List, null) },
                 )
 
@@ -38,7 +40,7 @@ fun MainScreen(vm: MainViewModel) {
                     onClick = {
                         navController.navigate(Routes.TASKS)
                     },
-                    label = { Text("Tareas") },
+                    label = { Text(stringResource(R.string.ui_type_tasks)) },
                     icon = { Icon(Icons.Default.Menu, null) },
                 )
             }

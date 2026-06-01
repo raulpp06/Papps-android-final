@@ -22,8 +22,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.model.data.Exam
 import es.upsa.papps.trabajofinal.navigation.Routes
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
@@ -36,15 +38,13 @@ fun SubjectDetailScreen(
     vm: MainViewModel,
 ) {
     val state by vm.uiState.collectAsState()
-
     val subject = state.subjects.find { it.id == id }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    val texto = subject?.name ?: "Asignatura no encontrada"
-                    Text(texto)
+                    Text(subject?.name ?: stringResource(R.string.ui_subject_not_found))
                 },
                 actions = {
                     IconButton(
@@ -54,7 +54,7 @@ fun SubjectDetailScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Edit,
-                            contentDescription = "Editar asignatura",
+                            contentDescription = stringResource(R.string.ui_edit_subject),
                         )
                     }
                     IconButton(
@@ -65,7 +65,7 @@ fun SubjectDetailScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Borrar asignatura",
+                            contentDescription = stringResource(R.string.ui_delete_subject),
                         )
                     }
                 },
@@ -78,34 +78,28 @@ fun SubjectDetailScreen(
                 .padding(16.dp),
         ) {
             if (subject == null) {
-                Text("Asignatura no encontrada")
+                Text(stringResource(R.string.ui_subject_not_found))
                 return@Column
             }
 
-            val subjectTasks = state.tasks.filter {
-                it.subjectId == subject.id
-            }
+            val subjectTasks = state.tasks.filter { it.subjectId == subject.id }
 
-            Text("Créditos: ${subject.credits}")
+            Text(stringResource(R.string.ui_credits_label, subject.credits))
 
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "Tareas y exámenes",
+                text = stringResource(R.string.ui_tasks_and_exams),
                 style = MaterialTheme.typography.titleMedium,
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             if (subjectTasks.isEmpty()) {
-                Text("No hay tareas asociadas")
+                Text(stringResource(R.string.ui_no_tasks))
             } else {
                 subjectTasks.forEach { task ->
-                    val icon = if (task is Exam) {
-                        Icons.Default.Warning
-                    } else {
-                        Icons.Default.Star
-                    }
+                    val icon = if (task is Exam) Icons.Default.Warning else Icons.Default.Star
 
                     Row(
                         modifier = Modifier
@@ -115,9 +109,7 @@ fun SubjectDetailScreen(
                             },
                     ) {
                         Icon(icon, null)
-                        Text(
-                            text = "${task.title} (${task.dueDate})",
-                        )
+                        Text(stringResource(R.string.ui_task_due_date, task.title, task.dueDate))
                     }
                 }
             }

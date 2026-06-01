@@ -20,8 +20,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.navigation.Routes
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 
@@ -36,7 +38,7 @@ fun SubjectsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Asignaturas") },
+                title = { Text(stringResource(R.string.ui_subjects)) },
                 actions = {
                     IconButton(
                         onClick = {
@@ -45,7 +47,7 @@ fun SubjectsScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Add,
-                            contentDescription = "Añadir asignatura",
+                            contentDescription = stringResource(R.string.ui_add_subject),
                         )
                     }
                 },
@@ -71,7 +73,7 @@ fun SubjectsScreen(
                             text = subject.name,
                             style = MaterialTheme.typography.titleMedium,
                         )
-                        Text("Créditos: ${subject.credits}")
+                        Text(stringResource(R.string.ui_credits_label, subject.credits))
                     }
                 }
             }

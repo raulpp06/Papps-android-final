@@ -2,8 +2,10 @@ package es.upsa.papps.trabajofinal.ui.screens.task
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.model.data.Exam
 import es.upsa.papps.trabajofinal.model.data.Task
 import es.upsa.papps.trabajofinal.navigation.Routes
@@ -44,11 +46,10 @@ fun TaskAddScreen(
         onGradePercentChange = { addVm.gradePercent = it },
 
         enabled = addVm.isValid(),
-        submitText = "Añadir",
+        submitText = stringResource(R.string.ui_add),
 
         onSubmit = {
             val task = if (addVm.isExam) {
-
                 Exam(
                     id = vm.uiState.value.tasks.size + 1,
                     subjectId = addVm.subjectId!!, // nunca sera null por isValid check
@@ -59,9 +60,7 @@ fun TaskAddScreen(
                     examHour = addVm.examHour!!, // nunca sera null por isValid check
                     gradePercent = addVm.gradePercent.toFloat()
                 )
-
             } else {
-
                 Task(
                     id = vm.uiState.value.tasks.size + 1,
                     subjectId = addVm.subjectId,
