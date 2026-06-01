@@ -17,6 +17,7 @@ fun SubjectAddScreen(
     addVm: SubjectFormViewModel = viewModel(),
 ) {
     AbstractSubjectForm(
+        navController = navController,
         pageTitle = stringResource(R.string.ui_new_subject),
         name = addVm.name,
         onNameChange = { addVm.name = it },

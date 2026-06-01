@@ -35,6 +35,7 @@ fun SubjectEditScreen(
     }
 
     AbstractSubjectForm(
+        navController = navController,
         pageTitle = stringResource(R.string.ui_edit_subject_title, subject.name),
         name = editVm.name,
         onNameChange = { editVm.name = it },
