@@ -4,8 +4,8 @@ import es.upsa.papps.trabajofinal.model.data.Exam
 import es.upsa.papps.trabajofinal.model.data.Subject
 import es.upsa.papps.trabajofinal.model.data.Task
 import es.upsa.papps.trabajofinal.model.data.TaskBase
-import es.upsa.papps.trabajofinal.model.data.filter.TaskStatusFilter
 import es.upsa.papps.trabajofinal.model.data.TaskFilters
+import es.upsa.papps.trabajofinal.model.data.filter.TaskStatusFilter
 import es.upsa.papps.trabajofinal.model.data.filter.TaskSubjectFilter
 import es.upsa.papps.trabajofinal.model.data.filter.TaskTypeFilter
 

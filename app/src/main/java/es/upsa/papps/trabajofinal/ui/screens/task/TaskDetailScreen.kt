@@ -100,6 +100,7 @@ fun TaskDetailScreen(
                     Text(stringResource(R.string.ui_hour_label, task.examHour))
                     Text(stringResource(R.string.ui_weight_label, task.gradePercent))
                 }
+
                 is Task -> {
                     Text(stringResource(R.string.ui_task_normal))
                 }

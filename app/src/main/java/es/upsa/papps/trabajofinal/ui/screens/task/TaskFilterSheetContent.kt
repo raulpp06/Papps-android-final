@@ -15,9 +15,7 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,10 +25,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import es.upsa.papps.trabajofinal.R
-import es.upsa.papps.trabajofinal.model.data.filter.TaskStatusFilter
 import es.upsa.papps.trabajofinal.model.data.TaskFilters
+import es.upsa.papps.trabajofinal.model.data.filter.TaskStatusFilter
 import es.upsa.papps.trabajofinal.model.data.filter.TaskSubjectFilter
 import es.upsa.papps.trabajofinal.model.data.filter.TaskTypeFilter
 import es.upsa.papps.trabajofinal.ui.util.DatePickerField
@@ -92,11 +89,13 @@ fun TaskFilterSheetContent(
                 TaskStatusFilter.entries.forEach {
                     DropdownMenuItem(
                         text = {
-                            Text(when (it) {
-                                TaskStatusFilter.ALL -> stringResource(R.string.ui_status_all)
-                                TaskStatusFilter.COMPLETED -> stringResource(R.string.ui_status_completed)
-                                TaskStatusFilter.PENDING -> stringResource(R.string.ui_status_pending)
-                            })
+                            Text(
+                                when (it) {
+                                    TaskStatusFilter.ALL -> stringResource(R.string.ui_status_all)
+                                    TaskStatusFilter.COMPLETED -> stringResource(R.string.ui_status_completed)
+                                    TaskStatusFilter.PENDING -> stringResource(R.string.ui_status_pending)
+                                }
+                            )
                         },
                         onClick = {
                             status = it

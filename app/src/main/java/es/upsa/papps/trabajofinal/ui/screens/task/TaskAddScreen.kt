@@ -11,8 +11,6 @@ import es.upsa.papps.trabajofinal.model.data.Task
 import es.upsa.papps.trabajofinal.navigation.Routes
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 import es.upsa.papps.trabajofinal.viewmodel.TaskFormViewModel
-import java.time.LocalDate
-import java.time.LocalTime
 
 @Composable
 fun TaskAddScreen(
