@@ -33,9 +33,14 @@ fun TaskDetailScreen(
     navController: NavController,
     id: Int,
     vm: MainViewModel,
+    type: String,
 ) {
     val state by vm.uiState.collectAsState()
-    val task = state.tasks.find { it.id == id }
+    val task = when (type) {
+        Routes.Subroutes.TASK -> state.tasks.find { it.id == id }
+        Routes.Subroutes.EXAM -> state.exams.find { it.id == id }
+        else -> return
+    }
 
     Scaffold(
         topBar = {
@@ -46,7 +51,7 @@ fun TaskDetailScreen(
                 actions = {
                     IconButton(
                         onClick = {
-                            navController.navigate("${Routes.TASK_EDIT}/${task?.id}")
+                            navController.navigate("${Routes.TASK_EDIT}/${type}/${task?.id}")
                         },
                     ) {
                         Icon(
@@ -57,7 +62,11 @@ fun TaskDetailScreen(
                     IconButton(
                         onClick = {
                             navController.popBackStack()
-                            vm.deleteTask(id)
+                            when (task) {
+                                is Exam -> vm.deleteExam(id)
+                                is Task -> vm.deleteTask(id)
+                                else -> {error("unreachable")}
+                            }
                         },
                     ) {
                         Icon(

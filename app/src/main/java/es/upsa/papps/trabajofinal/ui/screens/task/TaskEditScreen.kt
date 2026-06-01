@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.model.data.Exam
 import es.upsa.papps.trabajofinal.model.data.Task
+import es.upsa.papps.trabajofinal.navigation.Routes
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 import es.upsa.papps.trabajofinal.viewmodel.TaskFormViewModel
 
@@ -18,10 +19,15 @@ fun TaskEditScreen(
     navController: NavController,
     id: Int,
     vm: MainViewModel,
+    type: String,
     editVm: TaskFormViewModel = viewModel(),
 ) {
     val state by vm.uiState.collectAsState()
-    val task = state.tasks.find { it.id == id } ?: return
+    val task = when (type) {
+        Routes.Subroutes.TASK -> state.tasks.find { it.id == id }
+        Routes.Subroutes.EXAM -> state.exams.find { it.id == id }
+        else -> return
+    }?: return
     val subjects = state.subjects
 
     LaunchedEffect(task) {
@@ -36,8 +42,8 @@ fun TaskEditScreen(
         subjectId = editVm.subjectId,
         onSubjectSelected = { editVm.subjectId = it },
 
-        dueDate = editVm.dueDateText,
-        onDueDateChange = { editVm.dueDateText = it },
+        dueDate = editVm.dueDate,
+        onDueDateChange = { editVm.dueDate = it },
 
         isExam = editVm.isExam,
         onExamToggle = { editVm.isExam = it },
@@ -45,8 +51,8 @@ fun TaskEditScreen(
         examRoom = editVm.examRoom,
         onExamRoomChange = { editVm.examRoom = it },
 
-        examHour = editVm.examHourText,
-        onExamHourChange = { editVm.examHourText = it },
+        examHour = editVm.examHour,
+        onExamHourChange = { editVm.examHour = it },
 
         gradePercent = editVm.gradePercent,
         onGradePercentChange = { editVm.gradePercent = it },
@@ -64,7 +70,7 @@ fun TaskEditScreen(
                     subjectId = subjectId!!, // nunca es null por el isValid
                     title = editVm.title,
                     dueDate = editVm.dueDate!!, // nunca es null por el isValid
-                    isCompleted = (task as? Exam)?.isCompleted ?: false,
+                    isCompleted = task.isCompleted,
                     examRoom = editVm.examRoom,
                     examHour = editVm.examHour!!, // nunca es null por el isValid
                     gradePercent = editVm.gradePercent.toFloat()
@@ -79,8 +85,12 @@ fun TaskEditScreen(
                 )
             }
 
-            vm.modifyTask(id, updated)
-            navController.popBackStack()
+            vm.updateTaskBase(task, updated)
+
+            navController.navigate(Routes.TASKS) {
+                popUpTo(Routes.TASKS) { inclusive = false }
+                launchSingleTop = true
+            }
         }
     )
 }

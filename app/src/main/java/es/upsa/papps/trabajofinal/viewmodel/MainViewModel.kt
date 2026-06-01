@@ -42,11 +42,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         examRepo.getAllFlow(),
         _filters,
     ) { subjects, tasks, exams, filters ->
-        val allTasks: List<TaskBase> = (tasks + exams).sortedBy { it.dueDate }
-
         MainUiState(
             subjects = subjects,
-            tasks = allTasks,
+            tasks = tasks,
+            exams = exams,
             activeTaskFilters = filters,
             isLoading = false,
         )
@@ -65,34 +64,67 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun modifyTask(id: Int, task: TaskBase) {
+    fun updateTaskBase(original: TaskBase, updated: TaskBase) {
         viewModelScope.launch {
-            when (task) {
-                is Task -> taskRepo.update(task)
-                is Exam -> examRepo.update(task)
+
+            when (original) {
+
+                is Task -> {
+                    when (updated) {
+
+                        is Task -> {
+                            taskRepo.update(updated)
+                        }
+
+                        is Exam -> {
+                            taskRepo.deleteById(original.id)
+                            examRepo.insert(updated.copy(id = 0))
+                        }
+                    }
+                }
+
+                is Exam -> {
+                    when (updated) {
+
+                        is Exam -> {
+                            examRepo.update(updated)
+                        }
+
+                        is Task -> {
+                            examRepo.deleteById(original.id)
+                            taskRepo.insert(updated.copy(id = 0))
+                        }
+                    }
+                }
             }
         }
     }
 
     fun toggleTask(id: Int) {
         viewModelScope.launch {
-            // Check tasks first, then exams
             val task = uiState.value.tasks.find { it.id == id } ?: return@launch
-            when (task) {
-                is Task -> taskRepo.setCompleted(id, !task.isCompleted)
-                is Exam -> examRepo.setCompleted(id, !task.isCompleted)
-            }
+            taskRepo.setCompleted(id, !task.isCompleted)
+        }
+    }
+
+    fun toggleExam(id: Int) {
+        viewModelScope.launch {
+            val task = uiState.value.exams.find { it.id == id } ?: return@launch
+            examRepo.setCompleted(id, !task.isCompleted)
         }
     }
 
     fun deleteTask(id: Int) {
         viewModelScope.launch {
-            // We need to know the type; look it up in the current state
             val task = uiState.value.tasks.find { it.id == id } ?: return@launch
-            when (task) {
-                is Task -> taskRepo.deleteById(id)
-                is Exam -> examRepo.deleteById(id)
-            }
+            taskRepo.deleteById(id)
+        }
+    }
+
+    fun deleteExam(id: Int) {
+        viewModelScope.launch {
+            val exam = uiState.value.exams.find { it.id == id } ?: return@launch
+            examRepo.deleteById(id)
         }
     }
 

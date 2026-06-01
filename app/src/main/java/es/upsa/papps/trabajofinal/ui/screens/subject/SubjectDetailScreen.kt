@@ -83,6 +83,8 @@ fun SubjectDetailScreen(
             }
 
             val subjectTasks = state.tasks.filter { it.subjectId == subject.id }
+            val subjectExams = state.exams.filter { it.subjectId == subject.id }
+            val subjectStuff = subjectExams + subjectTasks
 
             Text(stringResource(R.string.ui_credits_label, subject.credits))
 
@@ -95,17 +97,18 @@ fun SubjectDetailScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            if (subjectTasks.isEmpty()) {
+            if (subjectStuff.isEmpty()) {
                 Text(stringResource(R.string.ui_no_tasks))
             } else {
-                subjectTasks.forEach { task ->
+                subjectStuff.forEach { task ->
                     val icon = if (task is Exam) Icons.Default.Warning else Icons.Default.Star
+                    val type = if (task is Exam) Routes.Subroutes.EXAM else Routes.Subroutes.TASK
 
                     Row(
                         modifier = Modifier
                             .padding(8.dp)
                             .clickable {
-                                navController.navigate("${Routes.TASK_DETAIL}/${task.id}")
+                                navController.navigate("${Routes.TASK_DETAIL}/$type/${task.id}")
                             },
                     ) {
                         Icon(icon, null)

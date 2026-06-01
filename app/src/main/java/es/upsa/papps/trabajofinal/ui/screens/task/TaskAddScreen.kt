@@ -28,8 +28,8 @@ fun TaskAddScreen(
         subjectId = addVm.subjectId,
         onSubjectSelected = { addVm.subjectId = it },
 
-        dueDate = addVm.dueDateText,
-        onDueDateChange = { addVm.dueDateText = it },
+        dueDate = addVm.dueDate,
+        onDueDateChange = { addVm.dueDate = it },
 
         isExam = addVm.isExam,
         onExamToggle = { addVm.isExam = it },
@@ -37,8 +37,8 @@ fun TaskAddScreen(
         examRoom = addVm.examRoom,
         onExamRoomChange = { addVm.examRoom = it },
 
-        examHour = addVm.examHourText,
-        onExamHourChange = { addVm.examHourText = it },
+        examHour = addVm.examHour,
+        onExamHourChange = { addVm.examHour = it },
 
         gradePercent = addVm.gradePercent,
         onGradePercentChange = { addVm.gradePercent = it },
@@ -49,7 +49,7 @@ fun TaskAddScreen(
         onSubmit = {
             val task = if (addVm.isExam) {
                 Exam(
-                    id = vm.uiState.value.tasks.size + 1,
+                    id = 0, // room deberia de hacerlo por nosotros
                     subjectId = addVm.subjectId!!, // nunca sera null por isValid check
                     title = addVm.title,
                     dueDate = addVm.dueDate!!, // nunca sera null por isValid check
@@ -60,7 +60,7 @@ fun TaskAddScreen(
                 )
             } else {
                 Task(
-                    id = vm.uiState.value.tasks.size + 1,
+                    id = 0, // room deberia de hacerlo por nosotros
                     subjectId = addVm.subjectId,
                     title = addVm.title,
                     dueDate = addVm.dueDate!!, // nunca sera null por isValid check

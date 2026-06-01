@@ -11,38 +11,48 @@ import es.upsa.papps.trabajofinal.model.data.filter.TaskTypeFilter
 
 data class MainUiState(
     val subjects: List<Subject> = emptyList(),
-    val tasks: List<TaskBase> = emptyList(),
+    val tasks: List<Task> = emptyList(),
+    val exams: List<Exam> = emptyList(),
     val activeTaskFilters: TaskFilters = TaskFilters(),
     val isLoading: Boolean = true,
 ) {
     fun isEmpty(): Boolean = subjects.isEmpty() && tasks.isEmpty()
 
-    val filteredTasks: List<TaskBase>
-        get() = tasks.filter { task ->
-            val f = activeTaskFilters
+    @Suppress("UNCHECKED_CAST")
+    val filteredTasks_: List<Task>
+        get() = filterList(tasks, activeTaskFilters) as List<Task> // estamos filtrando una lista que solo tiene tasks, el cast funciona
 
-            val statusMatch = when (f.status) {
-                TaskStatusFilter.ALL -> true
-                TaskStatusFilter.PENDING -> !task.isCompleted
-                TaskStatusFilter.COMPLETED -> task.isCompleted
+    @Suppress("UNCHECKED_CAST")
+    val filteredExams_: List<Exam>
+        get() = filterList(exams, activeTaskFilters) as List<Exam> // estamos filtrando una lista que solo tiene tasks, el cast funciona
+
+    companion object {
+        fun filterList(list: List<TaskBase>, filters: TaskFilters) =
+            list.filter { task ->
+
+                val statusMatch = when (filters.status) {
+                    TaskStatusFilter.ALL -> true
+                    TaskStatusFilter.PENDING -> !task.isCompleted
+                    TaskStatusFilter.COMPLETED -> task.isCompleted
+                }
+
+                val subjectMatch = when (val s = filters.subject) {
+                    TaskSubjectFilter.All -> true
+                    TaskSubjectFilter.NoSubject -> task.subjectId == null
+                    is TaskSubjectFilter.Subject -> task.subjectId == s.subjectId
+                }
+
+                val typeMatch = when (filters.taskType) {
+                    TaskTypeFilter.ALL -> true
+                    TaskTypeFilter.EXAM -> task is Exam
+                    TaskTypeFilter.TASK -> task is Task
+                }
+
+                val dateMatch =
+                    (filters.fromDate == null || !task.dueDate.isBefore(filters.fromDate)) &&
+                            (filters.toDate == null || !task.dueDate.isAfter(filters.toDate))
+
+                statusMatch && subjectMatch && typeMatch && dateMatch
             }
-
-            val subjectMatch = when (val s = f.subject) {
-                TaskSubjectFilter.All -> true
-                TaskSubjectFilter.NoSubject -> task.subjectId == null
-                is TaskSubjectFilter.Subject -> task.subjectId == s.subjectId
-            }
-
-            val typeMatch = when (f.taskType) {
-                TaskTypeFilter.ALL -> true
-                TaskTypeFilter.EXAM -> task is Exam
-                TaskTypeFilter.TASK -> task is Task
-            }
-
-            val dateMatch =
-                (f.fromDate == null || !task.dueDate.isBefore(f.fromDate)) &&
-                        (f.toDate == null || !task.dueDate.isAfter(f.toDate))
-
-            statusMatch && subjectMatch && typeMatch && dateMatch
-        }
+    }
 }

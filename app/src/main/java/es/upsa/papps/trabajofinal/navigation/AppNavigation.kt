@@ -77,21 +77,23 @@ fun AppNavigation(
         }
 
         composable(
-            "${Routes.TASK_DETAIL}/{id}",
+            "${Routes.TASK_DETAIL}/{type}/{id}",
             enterTransition = { slideUpEnter },
             exitTransition = { slideDownExit },
             popEnterTransition = { null },
             popExitTransition = { slideDownExit },
         ) { backstack ->
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
-            if (id != null) TaskDetailScreen(navController, id, vm)
+            val type = backstack.arguments?.getString("type")?: ""
+            if (id != null) TaskDetailScreen(navController, id, vm, type)
         }
 
         composable(
-            "${Routes.TASK_EDIT}/{id}",
+            "${Routes.TASK_EDIT}/{type}/{id}",
         ) { backstack ->
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
-            if (id != null) TaskEditScreen(navController, id, vm)
+            val type = backstack.arguments?.getString("type")?: ""
+            if (id != null) TaskEditScreen(navController, id, vm, type)
         }
 
         composable(

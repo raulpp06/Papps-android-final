@@ -81,16 +81,16 @@ fun TasksScreen(
         LazyColumn(
             contentPadding = padding,
         ) {
-            items(state.filteredTasks) { task ->
+            items((state.filteredTasks_ + state.filteredExams_)) { task ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
                         .clickable {
-                            navController.navigate("${Routes.TASK_DETAIL}/${task.id}")
+                            navController.navigate("${Routes.TASK_DETAIL}/${if (task is Exam) Routes.Subroutes.EXAM else Routes.Subroutes.TASK}/${task.id}")
                         },
                     colors = if (task is Exam) CardDefaults.cardColors()
-                        .copy(containerColor = Color.Red) else CardDefaults.cardColors()
+                        .copy(containerColor = MaterialTheme.colorScheme.secondaryContainer) else CardDefaults.cardColors()
                 ) {
                     Row(
                         modifier = Modifier

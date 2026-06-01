@@ -13,4 +13,9 @@ object Routes {
     val TASK_FILTER = "task_filter"
 
     val SETTINGS = "settings"
+
+    object Subroutes {
+        val TASK = "task"
+        val EXAM = "exam"
+    }
 }
