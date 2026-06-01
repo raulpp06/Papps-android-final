@@ -23,6 +23,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import es.upsa.papps.trabajofinal.R
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -34,6 +36,8 @@ fun DatePickerField(
     onValueChange: (LocalDate?) -> Unit,
     modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null,
+    isError: Boolean = false,
+    supportingText: @Composable (() -> Unit)? = null,
 ) {
     val state = rememberDatePickerState()
     var showDialog by remember { mutableStateOf(false) }
@@ -46,6 +50,8 @@ fun DatePickerField(
             OutlinedTextField(
                 label = label,
                 value = value?.toString() ?: "",
+                isError = isError,
+                supportingText = supportingText,
                 onValueChange = {},
                 readOnly = true,
                 modifier = modifier

@@ -88,25 +88,32 @@ fun TaskAddScreen(
         AbstractTaskForm(
             title = addVm.title,
             onTitleChange = { addVm.title = it },
+            titleIsError = addVm.title.isBlank(),
 
             subjects = subjects,
             subjectId = addVm.subjectId,
             onSubjectSelected = { addVm.subjectId = it },
+            subjectIsError = addVm.isExam && addVm.subjectId == null,
 
             dueDate = addVm.dueDate,
             onDueDateChange = { addVm.dueDate = it },
+            dueDateIsError = addVm.dueDate == null,
 
             isExam = addVm.isExam,
             onExamToggle = { addVm.isExam = it },
 
             examRoom = addVm.examRoom,
             onExamRoomChange = { addVm.examRoom = it },
+            examRoomIsError = addVm.examRoom.isBlank(),
 
             examHour = addVm.examHour,
             onExamHourChange = { addVm.examHour = it },
+            examHourIsError = addVm.examHour == null,
 
             gradePercent = addVm.gradePercent,
             onGradePercentChange = { addVm.gradePercent = it },
+            gradePercentIsError = (addVm.gradePercent.toDoubleOrNull() ?: -1.0) !in 0.0..1.0,
+
             modifier = Modifier.padding(padding)
         )
     }

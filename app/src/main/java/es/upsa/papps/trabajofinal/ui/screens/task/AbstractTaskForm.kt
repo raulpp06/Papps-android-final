@@ -28,25 +28,33 @@ import java.time.LocalTime
 fun AbstractTaskForm(
     title: String,
     onTitleChange: (String) -> Unit,
+    titleIsError: Boolean,
     subjects: List<Subject>,
     subjectId: Int?,
     onSubjectSelected: (Int?) -> Unit,
+    subjectIsError: Boolean,
     dueDate: LocalDate?,
     onDueDateChange: (LocalDate?) -> Unit,
+    dueDateIsError: Boolean,
     isExam: Boolean,
     onExamToggle: (Boolean) -> Unit,
     examRoom: String,
     onExamRoomChange: (String) -> Unit,
+    examRoomIsError: Boolean,
     examHour: LocalTime?,
     onExamHourChange: (LocalTime?) -> Unit,
+    examHourIsError: Boolean,
     gradePercent: String,
     onGradePercentChange: (String) -> Unit,
+    gradePercentIsError: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier.padding(16.dp)) {
         OutlinedTextField(
             value = title,
             onValueChange = onTitleChange,
+            isError = titleIsError,
+            supportingText = { if (titleIsError) Text(stringResource(R.string.ui_mandatory_field)) },
             modifier = Modifier.fillMaxWidth(),
             label = { Text(stringResource(R.string.ui_title)) },
         )
@@ -56,6 +64,8 @@ fun AbstractTaskForm(
         SubjectPickerField(
             subjects = subjects,
             subjectId = subjectId,
+            isError = subjectIsError,
+            supportingText = { if (subjectIsError) Text(stringResource(R.string.ui_mandatory_field)) },
             modifier = Modifier.fillMaxWidth(),
             onSubjectSelected = onSubjectSelected,
         )
@@ -65,6 +75,8 @@ fun AbstractTaskForm(
         DatePickerField(
             value = dueDate,
             onValueChange = onDueDateChange,
+            isError = dueDateIsError,
+            supportingText = { if (dueDateIsError) Text(stringResource(R.string.ui_mandatory_field)) },
             modifier = Modifier.fillMaxWidth(),
             label = { Text(stringResource(R.string.ui_date)) },
         )
@@ -111,6 +123,8 @@ fun AbstractTaskForm(
             OutlinedTextField(
                 value = examRoom,
                 onValueChange = onExamRoomChange,
+                isError = examRoomIsError,
+                supportingText = { if (examRoomIsError) Text(stringResource(R.string.ui_mandatory_field)) },
                 modifier = Modifier.fillMaxWidth(),
                 label = { Text(stringResource(R.string.ui_room)) },
             )
@@ -120,6 +134,8 @@ fun AbstractTaskForm(
             TimePickerField(
                 value = examHour,
                 onValueChange = onExamHourChange,
+                isError = examHourIsError,
+                supportingText = { if (examHourIsError) Text(stringResource(R.string.ui_mandatory_field)) },
                 modifier = Modifier.fillMaxWidth(),
                 label = { Text(stringResource(R.string.ui_hour)) },
             )
@@ -129,6 +145,8 @@ fun AbstractTaskForm(
             OutlinedTextField(
                 value = gradePercent,
                 onValueChange = onGradePercentChange,
+                isError = gradePercentIsError,
+                supportingText = { if (gradePercentIsError) Text(stringResource(R.string.ui_mandatory_field)) },
                 modifier = Modifier.fillMaxWidth(),
                 label = { Text(stringResource(R.string.ui_grade_weight)) },
             )

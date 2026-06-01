@@ -88,8 +88,10 @@ fun SubjectEditScreen(
         AbstractSubjectForm(
             name = editVm.name,
             onNameChange = { editVm.name = it },
+            nameIsError = editVm.name.isBlank(),
             teacher = editVm.teacher,
             onTeacherChange = { editVm.teacher = it },
+            teacherIsError = editVm.teacher.isBlank(),
             credits = editVm.credits,
             onCreditsChange = { editVm.credits = it },
             modifier = Modifier.padding(padding)

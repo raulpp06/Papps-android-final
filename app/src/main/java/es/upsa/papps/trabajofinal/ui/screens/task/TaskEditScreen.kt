@@ -109,25 +109,31 @@ fun TaskEditScreen(
         AbstractTaskForm(
             title = editVm.title,
             onTitleChange = { editVm.title = it },
+            titleIsError = editVm.title.isBlank(),
 
             subjects = subjects,
             subjectId = editVm.subjectId,
             onSubjectSelected = { editVm.subjectId = it },
+            subjectIsError = editVm.isExam && editVm.subjectId == null,
 
             dueDate = editVm.dueDate,
             onDueDateChange = { editVm.dueDate = it },
+            dueDateIsError = editVm.dueDate == null,
 
             isExam = editVm.isExam,
             onExamToggle = { editVm.isExam = it },
 
             examRoom = editVm.examRoom,
             onExamRoomChange = { editVm.examRoom = it },
+            examRoomIsError = editVm.examRoom.isBlank(),
 
             examHour = editVm.examHour,
             onExamHourChange = { editVm.examHour = it },
+            examHourIsError = editVm.examHour == null,
 
             gradePercent = editVm.gradePercent,
             onGradePercentChange = { editVm.gradePercent = it },
+            gradePercentIsError = (editVm.gradePercent.toDoubleOrNull() ?: -1.0) !in 0.0..1.0,
 
             modifier = Modifier.padding(padding),
         )

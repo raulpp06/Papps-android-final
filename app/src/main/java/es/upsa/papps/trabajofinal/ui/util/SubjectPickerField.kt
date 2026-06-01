@@ -24,6 +24,8 @@ fun SubjectPickerField(
     subjectId: Int?,
     onSubjectSelected: (Int?) -> Unit,
     modifier: Modifier = Modifier,
+    isError: Boolean = false,
+    supportingText: @Composable (() -> Unit)? = null,
 ) {
 
     val selectedSubject = subjects.find { it.id == subjectId }
@@ -36,6 +38,8 @@ fun SubjectPickerField(
     ) {
         OutlinedTextField(
             value = selectedSubject?.name ?: stringResource(R.string.ui_no_subject),
+            isError = isError,
+            supportingText = supportingText,
             onValueChange = {},
             readOnly = true,
             label = { Text(stringResource(R.string.ui_subject)) },

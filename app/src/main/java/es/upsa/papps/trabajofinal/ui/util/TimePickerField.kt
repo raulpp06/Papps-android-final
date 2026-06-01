@@ -32,6 +32,8 @@ fun TimePickerField(
     onValueChange: (LocalTime?) -> Unit,
     modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null,
+    isError: Boolean = false,
+    supportingText: @Composable (() -> Unit)? = null,
 ) {
     val state = rememberTimePickerState()
     var showDialog by remember { mutableStateOf(false) }
@@ -44,6 +46,8 @@ fun TimePickerField(
             OutlinedTextField(
                 label = label,
                 value = value?.toString() ?: "",
+                isError = isError,
+                supportingText = supportingText,
                 onValueChange = {},
                 readOnly = true,
                 modifier = modifier

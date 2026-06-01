@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.navigation.AppNavigation
@@ -22,12 +23,13 @@ import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 @Composable
 fun MainScreen(vm: MainViewModel) {
     val navController = rememberNavController()
+    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
     Scaffold(
         bottomBar = {
             NavigationBar {
                 NavigationBarItem(
-                    selected = false,
+                    selected = currentRoute == Routes.SUBJECTS,
                     onClick = {
                         navController.navigate(Routes.SUBJECTS)
                     },
@@ -36,7 +38,7 @@ fun MainScreen(vm: MainViewModel) {
                 )
 
                 NavigationBarItem(
-                    selected = false,
+                    selected = currentRoute == Routes.TASKS,
                     onClick = {
                         navController.navigate(Routes.TASKS)
                     },
@@ -45,7 +47,7 @@ fun MainScreen(vm: MainViewModel) {
                 )
 
                 NavigationBarItem(
-                    selected = false,
+                    selected = currentRoute == Routes.SETTINGS,
                     onClick = {
                         navController.navigate(Routes.SETTINGS)
                     },

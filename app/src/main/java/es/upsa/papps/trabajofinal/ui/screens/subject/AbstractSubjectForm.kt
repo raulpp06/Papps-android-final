@@ -8,6 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -17,11 +21,13 @@ import es.upsa.papps.trabajofinal.R
 fun AbstractSubjectForm(
     name: String,
     onNameChange: (String) -> Unit,
+    nameIsError: Boolean,
     teacher: String,
     onTeacherChange: (String) -> Unit,
+    teacherIsError: Boolean,
     credits: String,
     onCreditsChange: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier
@@ -30,6 +36,8 @@ fun AbstractSubjectForm(
         OutlinedTextField(
             value = name,
             onValueChange = onNameChange,
+            isError = nameIsError,
+            supportingText = { if (nameIsError) Text(stringResource(R.string.ui_mandatory_field)) },
             modifier = Modifier.fillMaxWidth(),
             label = { Text(stringResource(R.string.ui_name)) },
         )
@@ -39,6 +47,8 @@ fun AbstractSubjectForm(
         OutlinedTextField(
             value = teacher,
             onValueChange = onTeacherChange,
+            isError = teacherIsError,
+            supportingText = { if (teacherIsError) Text(stringResource(R.string.ui_mandatory_field)) },
             modifier = Modifier.fillMaxWidth(),
             label = { Text(stringResource(R.string.ui_profesor)) },
         )

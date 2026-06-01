@@ -9,6 +9,7 @@
     <string name="ui_all">Todas</string>
     <string name="ui_name">Nombre</string>
     <string name="ui_back">Atras</string>
+    <string name="ui_mandatory_field">Campo obligatorio</string>
 
     <!-- Formulario asignatura -->
     <string name="ui_profesor">Profesor</string>
