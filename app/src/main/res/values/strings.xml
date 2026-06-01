@@ -12,6 +12,7 @@
 
     <!-- Subject form -->
     <string name="ui_profesor">Teacher</string>
+    <string name="ui_profesor_label">Teacher: %1$s</string>
     <string name="ui_credits">Credits</string>
     <string name="ui_error_positive_number">Enter a positive number</string>
     <string name="ui_new_subject">New subject</string>

@@ -12,6 +12,7 @@
 
     <!-- Formulario asignatura -->
     <string name="ui_profesor">Profesor</string>
+    <string name="ui_profesor_label">Profesor: %1$s</string>
     <string name="ui_credits">Créditos</string>
     <string name="ui_error_positive_number">Introduce un número positivo</string>
     <string name="ui_new_subject">Nueva Asignatura</string>

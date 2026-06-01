@@ -109,6 +109,10 @@ fun SubjectDetailScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
+            Text(stringResource(R.string.ui_profesor_label, subject.teacher))
+
+            Spacer(modifier = Modifier.height(24.dp))
+
             Text(
                 text = stringResource(R.string.ui_tasks_and_exams),
                 style = MaterialTheme.typography.titleMedium,
