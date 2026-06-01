@@ -16,7 +16,6 @@ data class MainUiState(
     val activeTaskFilters: TaskFilters = TaskFilters(),
     val isLoading: Boolean = true,
 ) {
-    fun isEmpty(): Boolean = subjects.isEmpty() && tasks.isEmpty()
 
     val filteredTasks: List<Task>
         get() = filterList(

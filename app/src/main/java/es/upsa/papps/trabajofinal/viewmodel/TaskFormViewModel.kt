@@ -22,16 +22,6 @@ class TaskFormViewModel : ViewModel() {
     var examRoom by mutableStateOf("")
     var gradePercent by mutableStateOf("")
 
-    fun reset() {
-        isExam = false
-        title = ""
-        subjectId = null
-        dueDate = null
-        examHour = null
-        examRoom = ""
-        gradePercent = ""
-    }
-
     fun load(task: TaskBase) {
         title = task.title
         subjectId = task.subjectId

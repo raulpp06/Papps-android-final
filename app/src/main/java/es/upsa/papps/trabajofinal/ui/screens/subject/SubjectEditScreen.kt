@@ -66,8 +66,7 @@ fun SubjectEditScreen(
                 actions = {
                     Button(
                         onClick = {
-                            vm.modifySubject(
-                                id,
+                            vm.updateSubject(
                                 Subject(
                                     id = id,
                                     name = editVm.name,

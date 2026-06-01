@@ -1,7 +1,6 @@
 package es.upsa.papps.trabajofinal.model.data
 
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
 
 data class Exam(
@@ -14,12 +13,4 @@ data class Exam(
     val examHour: LocalTime,
     val gradePercent: Float // de 0 a 1
 ) : TaskBase(id, subjectId, title, dueDate, isCompleted) {
-    fun isFinished(): Boolean {
-        val examDateTime = LocalDateTime.of(
-            dueDate,
-            examHour
-        )
-
-        return LocalDateTime.now() > examDateTime
-    }
 }

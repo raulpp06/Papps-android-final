@@ -11,9 +11,6 @@ class SubjectFormViewModel : ViewModel() {
     var teacher by mutableStateOf("")
     var credits by mutableStateOf("")
 
-    private val creditsInt
-        get() = credits.toIntOrNull()
-
     private var initialized = false
 
     fun loadSubject(subject: Subject) {

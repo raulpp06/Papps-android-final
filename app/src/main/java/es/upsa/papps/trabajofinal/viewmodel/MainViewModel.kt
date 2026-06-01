@@ -120,13 +120,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun toggleExam(id: Int) {
-        viewModelScope.launch {
-            val task = uiState.value.exams.find { it.id == id } ?: return@launch
-            examRepo.setCompleted(id, !task.isCompleted)
-        }
-    }
-
     fun deleteTask(id: Int) {
         viewModelScope.launch {
             uiState.value.tasks.find { it.id == id } ?: return@launch
@@ -147,7 +140,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun modifySubject(id: Int, subject: Subject) {
+    fun updateSubject(subject: Subject) {
         viewModelScope.launch {
             subjectRepo.update(subject)
         }
@@ -161,10 +154,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun updateFilters(newFilters: TaskFilters) {
         _filters.value = newFilters
-    }
-
-    fun clearFilters() {
-        _filters.value = TaskFilters()
     }
 
     fun setTheme(theme: AppTheme) {

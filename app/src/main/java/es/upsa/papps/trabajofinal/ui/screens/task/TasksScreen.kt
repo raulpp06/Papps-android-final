@@ -38,6 +38,7 @@ import es.upsa.papps.trabajofinal.model.data.Exam
 import es.upsa.papps.trabajofinal.navigation.Routes
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 
+@Suppress("AssignedValueIsNeverRead")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TasksScreen(
