@@ -1,5 +1,3 @@
-@file:Suppress("AssignedValueIsNeverRead")
-
 package es.upsa.papps.trabajofinal.ui.util
 
 import androidx.compose.foundation.clickable
@@ -32,13 +30,15 @@ import java.time.LocalTime
 fun TimePickerField(
     value: LocalTime?,
     onValueChange: (LocalTime?) -> Unit,
+    modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null,
 ) {
     val state = rememberTimePickerState()
     var showDialog by remember { mutableStateOf(false) }
 
     Row(
-        verticalAlignment = Alignment.CenterVertically
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(modifier = Modifier.weight(1f)) {
             OutlinedTextField(
@@ -46,25 +46,37 @@ fun TimePickerField(
                 value = value?.toString() ?: "",
                 onValueChange = {},
                 readOnly = true,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Box(
-                modifier = Modifier
-                    .matchParentSize()
+                modifier = modifier
+                    .fillMaxWidth()
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null
                     ) {
                         showDialog = true
+                    },
+                trailingIcon = {
+                    if (value != null) {
+                        IconButton(onClick = { onValueChange(null) }) {
+                            Icon(
+                                imageVector = Icons.Default.Clear,
+                                contentDescription = "Limpiar hora"
+                            )
+                        }
                     }
+                }
             )
-        }
-
-        IconButton(onClick = { onValueChange(null) }) {
-            Icon(
-                imageVector = Icons.Default.Clear,
-                contentDescription = "Limpiar hora"
-            )
+            if (value == null) {
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null
+                        ) {
+                            showDialog = true
+                        }
+                )
+            }
         }
     }
 
@@ -75,7 +87,6 @@ fun TimePickerField(
             confirmButton = {
                 TextButton(onClick = {
                     onValueChange(LocalTime.of(state.hour, state.minute))
-                    showDialog = false
                     showDialog = false
                 }) {
                     Text("OK")

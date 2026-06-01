@@ -23,6 +23,7 @@ fun SubjectPickerField(
     subjects: List<Subject>,
     subjectId: Int?,
     onSubjectSelected: (Int?) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
 
     val selectedSubject = subjects.find { it.id == subjectId }
@@ -31,6 +32,7 @@ fun SubjectPickerField(
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
+        modifier = modifier,
     ) {
         OutlinedTextField(
             value = selectedSubject?.name ?: stringResource(R.string.ui_no_subject),
@@ -40,7 +42,7 @@ fun SubjectPickerField(
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded)
             },
-            modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
+            modifier = modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
         )
 
         ExposedDropdownMenu(

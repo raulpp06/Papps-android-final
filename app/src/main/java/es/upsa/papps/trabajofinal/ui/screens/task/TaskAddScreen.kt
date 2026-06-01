@@ -1,7 +1,18 @@
 package es.upsa.papps.trabajofinal.ui.screens.task
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -12,6 +23,7 @@ import es.upsa.papps.trabajofinal.navigation.Routes
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 import es.upsa.papps.trabajofinal.viewmodel.TaskFormViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskAddScreen(
     navController: NavController,
@@ -20,56 +32,82 @@ fun TaskAddScreen(
 ) {
     val subjects = vm.uiState.collectAsState().value.subjects
 
-    AbstractTaskForm(
-        title = addVm.title,
-        onTitleChange = { addVm.title = it },
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(stringResource(R.string.ui_add_task))
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = {
+                            navController.popBackStack()
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.ui_back),
+                        )
+                    }
+                },
+                actions = {
+                    Button(
+                        onClick = {
+                            val task = if (addVm.isExam) {
+                                Exam(
+                                    id = 0, // room deberia de hacerlo por nosotros
+                                    subjectId = addVm.subjectId!!, // nunca sera null por isValid check
+                                    title = addVm.title,
+                                    dueDate = addVm.dueDate!!, // nunca sera null por isValid check
+                                    isCompleted = false,
+                                    examRoom = addVm.examRoom,
+                                    examHour = addVm.examHour!!, // nunca sera null por isValid check
+                                    gradePercent = addVm.gradePercent.toFloat()
+                                )
+                            } else {
+                                Task(
+                                    id = 0, // room deberia de hacerlo por nosotros
+                                    subjectId = addVm.subjectId,
+                                    title = addVm.title,
+                                    dueDate = addVm.dueDate!!, // nunca sera null por isValid check
+                                    isCompleted = false
+                                )
+                            }
 
-        subjects = subjects,
-        subjectId = addVm.subjectId,
-        onSubjectSelected = { addVm.subjectId = it },
+                            vm.addTask(task)
+                            navController.navigate(Routes.TASKS)
+                        },
+                        enabled = addVm.isValid(),
+                    ) {
+                        Text(stringResource(R.string.ui_add))
+                    }
+                },
+            )
+        },
+    ) { padding ->
+        AbstractTaskForm(
+            title = addVm.title,
+            onTitleChange = { addVm.title = it },
 
-        dueDate = addVm.dueDate,
-        onDueDateChange = { addVm.dueDate = it },
+            subjects = subjects,
+            subjectId = addVm.subjectId,
+            onSubjectSelected = { addVm.subjectId = it },
 
-        isExam = addVm.isExam,
-        onExamToggle = { addVm.isExam = it },
+            dueDate = addVm.dueDate,
+            onDueDateChange = { addVm.dueDate = it },
 
-        examRoom = addVm.examRoom,
-        onExamRoomChange = { addVm.examRoom = it },
+            isExam = addVm.isExam,
+            onExamToggle = { addVm.isExam = it },
 
-        examHour = addVm.examHour,
-        onExamHourChange = { addVm.examHour = it },
+            examRoom = addVm.examRoom,
+            onExamRoomChange = { addVm.examRoom = it },
 
-        gradePercent = addVm.gradePercent,
-        onGradePercentChange = { addVm.gradePercent = it },
+            examHour = addVm.examHour,
+            onExamHourChange = { addVm.examHour = it },
 
-        enabled = addVm.isValid(),
-        submitText = stringResource(R.string.ui_add),
-
-        onSubmit = {
-            val task = if (addVm.isExam) {
-                Exam(
-                    id = 0, // room deberia de hacerlo por nosotros
-                    subjectId = addVm.subjectId!!, // nunca sera null por isValid check
-                    title = addVm.title,
-                    dueDate = addVm.dueDate!!, // nunca sera null por isValid check
-                    isCompleted = false,
-                    examRoom = addVm.examRoom,
-                    examHour = addVm.examHour!!, // nunca sera null por isValid check
-                    gradePercent = addVm.gradePercent.toFloat()
-                )
-            } else {
-                Task(
-                    id = 0, // room deberia de hacerlo por nosotros
-                    subjectId = addVm.subjectId,
-                    title = addVm.title,
-                    dueDate = addVm.dueDate!!, // nunca sera null por isValid check
-                    isCompleted = false
-                )
-            }
-
-            vm.addTask(task)
-            navController.navigate(Routes.TASKS)
-        }
-    )
+            gradePercent = addVm.gradePercent,
+            onGradePercentChange = { addVm.gradePercent = it },
+            modifier = Modifier.padding(padding)
+        )
+    }
 }

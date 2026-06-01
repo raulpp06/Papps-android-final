@@ -189,6 +189,7 @@ fun TaskFilterSheetContent(
         DatePickerField(
             label = { Text(stringResource(R.string.ui_date_from)) },
             value = fromDate,
+            modifier = Modifier.fillMaxWidth(),
             onValueChange = { fromDate = it },
         )
 
@@ -198,6 +199,7 @@ fun TaskFilterSheetContent(
         DatePickerField(
             label = { Text(stringResource(R.string.ui_date_to)) },
             value = toDate,
+            modifier = Modifier.fillMaxWidth(),
             onValueChange = { toDate = it },
         )
 

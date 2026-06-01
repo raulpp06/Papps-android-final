@@ -20,7 +20,7 @@ Calificación:
 - **Notable**: Sólo se podrá optar a la calificación Notable si se ha superado la parte correspondiente al aprobado. Además, se deberá incluir:
 * Material3 Avanzado [SUPONGO]
 * Manejo adecuado y encapsulación avanzada del estado en Compose y Navigation [SUPONGO]
-* Diseño UI cuidado y consistente [NO]
+* Diseño UI cuidado y consistente [HECHO]
 * Uso de Navigation Drawer o Bottom Navigation [HECHO]
 * Gestión de temas (claro/oscuro) [HECHO]
 * Uso de persistencia local (Room) [HECHO]

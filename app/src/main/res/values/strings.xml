@@ -4,6 +4,8 @@
     <!-- General -->
     <string name="ui_add">Add</string>
     <string name="ui_save">Save</string>
+    <string name="ui_delete">Delete</string>
+    <string name="ui_cancel">Cancel</string>
     <string name="ui_all">All</string>
     <string name="ui_name">Name</string>
     <string name="ui_back">Back</string>
@@ -13,6 +15,7 @@
     <string name="ui_credits">Credits</string>
     <string name="ui_error_positive_number">Enter a positive number</string>
     <string name="ui_new_subject">New subject</string>
+    <string name="ui_delete_subject_alert">Are you sure you want to delete this subject? All tasks related to this subject will be deleted.</string>
 
     <!-- Subjects -->
     <string name="ui_subjects">Subjects</string>

@@ -4,6 +4,8 @@
     <!-- General -->
     <string name="ui_add">Añadir</string>
     <string name="ui_save">Guardar</string>
+    <string name="ui_delete">Borrar</string>
+    <string name="ui_cancel">Cancelar</string>
     <string name="ui_all">Todas</string>
     <string name="ui_name">Nombre</string>
     <string name="ui_back">Atras</string>
@@ -13,6 +15,7 @@
     <string name="ui_credits">Créditos</string>
     <string name="ui_error_positive_number">Introduce un número positivo</string>
     <string name="ui_new_subject">Nueva Asignatura</string>
+    <string name="ui_delete_subject_alert">¿Estás seguro de que deseas eliminar esta asignatura? Todas las tareas relacionadas con esta asignatura también se eliminarán.</string>
 
     <!-- Asignaturas -->
     <string name="ui_subjects">Asignaturas</string>

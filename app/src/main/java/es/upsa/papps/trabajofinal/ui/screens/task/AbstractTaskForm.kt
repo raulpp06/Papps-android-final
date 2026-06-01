@@ -3,12 +3,12 @@ package es.upsa.papps.trabajofinal.ui.screens.task
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -24,7 +24,6 @@ import es.upsa.papps.trabajofinal.ui.util.TimePickerField
 import java.time.LocalDate
 import java.time.LocalTime
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AbstractTaskForm(
     title: String,
@@ -42,15 +41,14 @@ fun AbstractTaskForm(
     onExamHourChange: (LocalTime?) -> Unit,
     gradePercent: String,
     onGradePercentChange: (String) -> Unit,
-    onSubmit: () -> Unit,
-    submitText: String,
-    enabled: Boolean,
+    modifier: Modifier = Modifier,
 ) {
-    Column(Modifier.padding(16.dp)) {
+    Column(modifier.padding(16.dp)) {
         // TITLE
         OutlinedTextField(
             value = title,
             onValueChange = onTitleChange,
+            modifier = Modifier.fillMaxWidth(),
             label = { Text(stringResource(R.string.ui_title)) },
         )
 
@@ -60,6 +58,7 @@ fun AbstractTaskForm(
         SubjectPickerField(
             subjects = subjects,
             subjectId = subjectId,
+            modifier = Modifier.fillMaxWidth(),
             onSubjectSelected = onSubjectSelected,
         )
 
@@ -69,13 +68,16 @@ fun AbstractTaskForm(
         DatePickerField(
             value = dueDate,
             onValueChange = onDueDateChange,
+            modifier = Modifier.fillMaxWidth(),
             label = { Text(stringResource(R.string.ui_date)) },
         )
 
         Spacer(Modifier.height(16.dp))
 
         // TYPE TOGGLE
-        Row {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
             Button(
                 onClick = { onExamToggle(false) },
                 modifier = Modifier.weight(1f),
@@ -114,6 +116,7 @@ fun AbstractTaskForm(
             OutlinedTextField(
                 value = examRoom,
                 onValueChange = onExamRoomChange,
+                modifier = Modifier.fillMaxWidth(),
                 label = { Text(stringResource(R.string.ui_room)) },
             )
 
@@ -122,6 +125,7 @@ fun AbstractTaskForm(
             TimePickerField(
                 value = examHour,
                 onValueChange = onExamHourChange,
+                modifier = Modifier.fillMaxWidth(),
                 label = { Text(stringResource(R.string.ui_hour)) },
             )
 
@@ -130,17 +134,9 @@ fun AbstractTaskForm(
             OutlinedTextField(
                 value = gradePercent,
                 onValueChange = onGradePercentChange,
+                modifier = Modifier.fillMaxWidth(),
                 label = { Text(stringResource(R.string.ui_grade_weight)) },
             )
-        }
-
-        Spacer(Modifier.height(20.dp))
-
-        Button(
-            onClick = onSubmit,
-            enabled = enabled,
-        ) {
-            Text(submitText)
         }
     }
 }

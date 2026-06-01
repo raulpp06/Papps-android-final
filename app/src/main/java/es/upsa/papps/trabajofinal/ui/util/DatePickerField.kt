@@ -1,5 +1,3 @@
-@file:Suppress("AssignedValueIsNeverRead")
-
 package es.upsa.papps.trabajofinal.ui.util
 
 import androidx.compose.foundation.clickable
@@ -29,18 +27,20 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 
-@OptIn(ExperimentalMaterial3Api::class)
+@Suppress("AssignedValueIsNeverRead")
 @Composable
 fun DatePickerField(
     value: LocalDate?,
     onValueChange: (LocalDate?) -> Unit,
+    modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null,
 ) {
     val state = rememberDatePickerState()
     var showDialog by remember { mutableStateOf(false) }
 
     Row(
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier,
     ) {
         Box(modifier = Modifier.weight(1f)) {
             OutlinedTextField(
@@ -48,25 +48,41 @@ fun DatePickerField(
                 value = value?.toString() ?: "",
                 onValueChange = {},
                 readOnly = true,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Box(
-                modifier = Modifier
-                    .matchParentSize()
+                modifier = modifier
+                    .fillMaxWidth()
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null
                     ) {
                         showDialog = true
+                    },
+                trailingIcon = {
+                    if (value != null) {
+                        IconButton(
+                            onClick = {
+                                onValueChange(null)
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Clear,
+                                contentDescription = "Clear date"
+                            )
+                        }
                     }
+                }
             )
-        }
-
-        IconButton(onClick = { onValueChange(null) }) {
-            Icon(
-                imageVector = Icons.Default.Clear,
-                contentDescription = "Limpiar dia"
-            )
+            if (value == null) {
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null
+                        ) {
+                            showDialog = true
+                        }
+                )
+            }
         }
     }
 
