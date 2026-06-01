@@ -1,5 +1,8 @@
 package es.upsa.papps.trabajofinal.navigation
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -22,47 +25,89 @@ fun AppNavigation(
     vm: MainViewModel,
     modifier: Modifier = Modifier,
 ) {
+    val slideUpEnter = slideInVertically(
+        initialOffsetY = { it },
+        animationSpec = tween(300)
+    )
+    val slideDownExit = slideOutVertically(
+        targetOffsetY = { it },
+        animationSpec = tween(300)
+    )
+
     NavHost(
         navController = navController,
         startDestination = Routes.SUBJECTS,
         modifier = modifier,
     ) {
         composable(Routes.SUBJECTS) { SubjectsScreen(navController, vm) }
-        composable(Routes.SUBJECT_ADD) { SubjectAddScreen(navController, vm) }
         composable(Routes.TASKS) { TasksScreen(navController, vm) }
-        composable(Routes.TASK_ADD) { TaskAddScreen(navController, vm) }
-        composable(Routes.TASK_FILTER) { TaskFilterScreen(navController, vm) }
 
-        composable("${Routes.SUBJECT_DETAIL}/{id}") { backstack ->
+        composable(
+            Routes.SUBJECT_ADD,
+            enterTransition = { slideUpEnter },
+            exitTransition = { slideDownExit },
+            popEnterTransition = { null },
+            popExitTransition = { slideDownExit },
+        ) { SubjectAddScreen(navController, vm) }
 
+        composable(
+            Routes.TASK_ADD,
+            enterTransition = { slideUpEnter },
+            exitTransition = { slideDownExit },
+            popEnterTransition = { null },
+            popExitTransition = { slideDownExit },
+        ) { TaskAddScreen(navController, vm) }
+
+        composable(
+            Routes.TASK_FILTER,
+            enterTransition = { slideUpEnter },
+            exitTransition = { slideDownExit },
+            popEnterTransition = { null },
+            popExitTransition = { slideDownExit },
+        ) { TaskFilterScreen(navController, vm) }
+
+        composable(
+            "${Routes.SUBJECT_DETAIL}/{id}",
+            enterTransition = { slideUpEnter },
+            exitTransition = { slideDownExit },
+            popEnterTransition = { null },
+            popExitTransition = { slideDownExit },
+        ) { backstack ->
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
-            if (id != null) {
-                SubjectDetailScreen(navController, id, vm)
-            }
+            if (id != null) SubjectDetailScreen(navController, id, vm)
         }
 
-        composable("${Routes.SUBJECT_EDIT}/{id}") { backstack ->
-
+        composable(
+            "${Routes.SUBJECT_EDIT}/{id}",
+            enterTransition = { slideUpEnter },
+            exitTransition = { slideDownExit },
+            popEnterTransition = { null },
+            popExitTransition = { slideDownExit },
+        ) { backstack ->
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
-            if (id != null) {
-                SubjectEditScreen(navController, id, vm)
-            }
+            if (id != null) SubjectEditScreen(navController, id, vm)
         }
 
-        composable("${Routes.TASK_DETAIL}/{id}") { backstack ->
-
+        composable(
+            "${Routes.TASK_DETAIL}/{id}",
+            enterTransition = { slideUpEnter },
+            exitTransition = { slideDownExit },
+            popEnterTransition = { null },
+            popExitTransition = { slideDownExit },
+        ) { backstack ->
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
-            if (id != null) {
-                TaskDetailScreen(navController, id, vm)
-            }
+            if (id != null) TaskDetailScreen(navController, id, vm)
         }
 
-        composable("${Routes.TASK_EDIT}/{id}") { backstack ->
-
+        composable(
+            "${Routes.TASK_EDIT}/{id}",
+            enterTransition = { slideUpEnter },
+            exitTransition = { slideDownExit },
+            popEnterTransition = { null },
+            popExitTransition = { slideDownExit },
+        ) { backstack ->
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
-            if (id != null) {
-                TaskEditScreen(navController, id, vm)
-            }
+            if (id != null) TaskEditScreen(navController, id, vm)
         }
     }
 }
