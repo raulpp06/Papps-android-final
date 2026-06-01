@@ -16,24 +16,18 @@ class TaskFormViewModel : ViewModel() {
     var title by mutableStateOf("")
     var subjectId by mutableStateOf<Int?>(null)
 
-    var dueDateText by mutableStateOf("")
-    var examHourText by mutableStateOf("")
+    var dueDate by mutableStateOf<LocalDate?>(null)
+    var examHour by mutableStateOf<LocalTime?>(null)
 
     var examRoom by mutableStateOf("")
     var gradePercent by mutableStateOf("")
-
-    val dueDate: LocalDate?
-        get() = runCatching { LocalDate.parse(dueDateText) }.getOrNull()
-
-    val examHour: LocalTime?
-        get() = runCatching { LocalTime.parse(examHourText) }.getOrNull()
 
     fun reset() {
         isExam = false
         title = ""
         subjectId = null
-        dueDateText = ""
-        examHourText = ""
+        dueDate = null
+        examHour = null
         examRoom = ""
         gradePercent = ""
     }
@@ -41,33 +35,23 @@ class TaskFormViewModel : ViewModel() {
     fun load(task: TaskBase) {
         title = task.title
         subjectId = task.subjectId
-        dueDateText = task.dueDate.toString()
+        dueDate = task.dueDate
 
         isExam = task is Exam
 
         if (task is Exam) {
             examRoom = task.examRoom
-            examHourText = task.examHour.toString()
+            examHour = task.examHour
             gradePercent = task.gradePercent.toString()
         }
     }
 
-    fun isDueDateValid() =
-        runCatching {
-            LocalDate.parse(dueDateText)
-        }.isSuccess
-
-    fun isExamHourValid() =
-        runCatching {
-            LocalTime.parse(examHourText)
-        }.isSuccess
-
     fun isValid(): Boolean {
-        if (title.isBlank() || !isDueDateValid()) return false
+        if (title.isBlank() || dueDate == null) return false
 
         return if (isExam) {
             examRoom.isNotBlank() &&
-                    isExamHourValid() &&
+                    examHour != null &&
                     subjectId != null &&
                     gradePercent.toFloatOrNull()?.let { it in 0f..1f } == true
         } else {

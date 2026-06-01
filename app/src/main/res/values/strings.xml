@@ -15,6 +15,7 @@
 
     <!-- Subjects -->
     <string name="ui_subjects">Subjects</string>
+    <string name="ui_subject">Subject</string>
     <string name="ui_add_subject">Add subject</string>
     <string name="ui_edit_subject">Edit subject</string>
     <string name="ui_edit_subject_title">Edit %1$s</string>
@@ -53,8 +54,10 @@
     <string name="ui_weight_label">Weight: %1$s</string>
 
     <!-- Task form -->
+    <string name="ui_date">Date</string>
     <string name="ui_date_format">Date (YYYY-MM-DD)</string>
     <string name="ui_invalid_date">Invalid date</string>
+    <string name="ui_hour">Time</string>
     <string name="ui_hour_format">Time (HH:MM)</string>
     <string name="ui_invalid_hour">Invalid time (use HH:MM)</string>
     <string name="ui_grade_weight">Weight (0–1)</string>

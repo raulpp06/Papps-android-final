@@ -15,6 +15,7 @@
 
     <!-- Asignaturas -->
     <string name="ui_subjects">Asignaturas</string>
+    <string name="ui_subject">Asignatura</string>
     <string name="ui_add_subject">Añadir asignatura</string>
     <string name="ui_edit_subject">Editar asignatura</string>
     <string name="ui_edit_subject_title">Editar %1$s</string>
@@ -53,8 +54,10 @@
     <string name="ui_weight_label">Peso: %1$s</string>
 
     <!-- Formulario tarea -->
+    <string name="ui_date">Fecha</string>
     <string name="ui_date_format">Fecha (YYYY-MM-DD)</string>
     <string name="ui_invalid_date">Fecha inválida</string>
+    <string name="ui_hour">Hora</string>
     <string name="ui_hour_format">Hora (HH:MM)</string>
     <string name="ui_invalid_hour">Hora inválida (usa HH:MM)</string>
     <string name="ui_grade_weight">Peso (0–1)</string>

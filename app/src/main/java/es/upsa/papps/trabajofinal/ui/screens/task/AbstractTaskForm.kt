@@ -12,14 +12,18 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TimePicker
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.model.data.Subject
+import es.upsa.papps.trabajofinal.ui.util.DatePickerField
 import es.upsa.papps.trabajofinal.ui.util.SubjectPickerField
+import es.upsa.papps.trabajofinal.ui.util.TimePickerField
 import java.time.LocalDate
+import java.time.LocalTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,28 +33,20 @@ fun AbstractTaskForm(
     subjects: List<Subject>,
     subjectId: Int?,
     onSubjectSelected: (Int?) -> Unit,
-    dueDate: String,
-    onDueDateChange: (String) -> Unit,
+    dueDate: LocalDate?,
+    onDueDateChange: (LocalDate?) -> Unit,
     isExam: Boolean,
     onExamToggle: (Boolean) -> Unit,
     examRoom: String,
     onExamRoomChange: (String) -> Unit,
-    examHour: String,
-    onExamHourChange: (String) -> Unit,
+    examHour: LocalTime?,
+    onExamHourChange: (LocalTime?) -> Unit,
     gradePercent: String,
     onGradePercentChange: (String) -> Unit,
     onSubmit: () -> Unit,
     submitText: String,
     enabled: Boolean,
 ) {
-    val showDateError =
-        dueDate.isNotBlank() && runCatching { LocalDate.parse(dueDate) }.isFailure
-
-    val showHourError =
-        isExam &&
-                examHour.isNotBlank() &&
-                runCatching { java.time.LocalTime.parse(examHour) }.isFailure
-
     Column(Modifier.padding(16.dp)) {
         // TITLE
         OutlinedTextField(
@@ -71,16 +67,10 @@ fun AbstractTaskForm(
         Spacer(Modifier.height(12.dp))
 
         // DATE
-        OutlinedTextField(
+        DatePickerField(
             value = dueDate,
             onValueChange = onDueDateChange,
-            label = { Text(stringResource(R.string.ui_date_format)) },
-            isError = showDateError,
-            supportingText = {
-                if (showDateError) {
-                    Text(stringResource(R.string.ui_invalid_date))
-                }
-            }
+            label = { Text(stringResource(R.string.ui_date)) },
         )
 
         Spacer(Modifier.height(16.dp))
@@ -130,16 +120,10 @@ fun AbstractTaskForm(
 
             Spacer(Modifier.height(8.dp))
 
-            OutlinedTextField(
+            TimePickerField(
                 value = examHour,
                 onValueChange = onExamHourChange,
-                label = { Text(stringResource(R.string.ui_hour_format)) },
-                isError = showHourError,
-                supportingText = {
-                    if (showHourError) {
-                        Text(stringResource(R.string.ui_invalid_hour))
-                    }
-                }
+                label = { Text(stringResource(R.string.ui_hour)) },
             )
 
             Spacer(Modifier.height(8.dp))
@@ -153,11 +137,9 @@ fun AbstractTaskForm(
 
         Spacer(Modifier.height(20.dp))
 
-        val canSubmit = enabled && !showDateError && (!isExam || !showHourError)
-
         Button(
             onClick = onSubmit,
-            enabled = canSubmit,
+            enabled = enabled,
         ) {
             Text(submitText)
         }

@@ -29,7 +29,7 @@ fun SubjectAddScreen(
         onSubmit = {
             vm.addSubject(
                 Subject(
-                    id = vm.uiState.value.subjects.size + 1,
+                    id = 0, // room deberia de hacerlo por nosotros
                     name = addVm.name,
                     teacher = addVm.teacher,
                     credits = addVm.credits.toInt(),

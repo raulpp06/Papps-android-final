@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
             }
 
             TrabajoFinalTheme(darkTheme = darkTheme) {
-                MainScreen(viewModel())
+                MainScreen(vm)
             }
         }
     }

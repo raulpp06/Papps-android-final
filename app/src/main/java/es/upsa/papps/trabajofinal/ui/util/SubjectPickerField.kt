@@ -13,6 +13,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import es.upsa.papps.trabajofinal.R
 import es.upsa.papps.trabajofinal.model.data.Subject
 
 @Composable
@@ -31,10 +33,10 @@ fun SubjectPickerField(
         onExpandedChange = { expanded = !expanded },
     ) {
         OutlinedTextField(
-            value = selectedSubject?.name ?: "Sin asignatura",
+            value = selectedSubject?.name ?: stringResource(R.string.ui_no_subject),
             onValueChange = {},
             readOnly = true,
-            label = { Text("Asignatura") },
+            label = { Text(stringResource(R.string.ui_subject)) },
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded)
             },
@@ -46,7 +48,7 @@ fun SubjectPickerField(
             onDismissRequest = { expanded = false },
         ) {
             DropdownMenuItem(
-                text = { Text("Sin asignatura") },
+                text = { Text(stringResource(R.string.ui_no_subject)) },
                 onClick = {
                     onSubjectSelected(null)
                     expanded = false
