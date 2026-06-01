@@ -6,7 +6,7 @@ import es.upsa.papps.trabajofinal.model.data.filter.TaskTypeFilter
 import java.time.LocalDate
 
 data class TaskFilters(
-    val status: TaskStatusFilter = TaskStatusFilter.ALL,
+    val status: TaskStatusFilter = TaskStatusFilter.PENDING,
     val subject: TaskSubjectFilter = TaskSubjectFilter.All,
     val taskType: TaskTypeFilter = TaskTypeFilter.ALL,
     val fromDate: LocalDate? = null,

@@ -1,4 +1,4 @@
-package es.upsa.papps.trabajofinal.repository
+package es.upsa.papps.trabajofinal.model.repository
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit

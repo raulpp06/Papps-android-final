@@ -8,7 +8,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import es.upsa.papps.trabajofinal.repository.AppTheme
+import es.upsa.papps.trabajofinal.model.repository.AppTheme
 import es.upsa.papps.trabajofinal.ui.MainScreen
 import es.upsa.papps.trabajofinal.ui.theme.TrabajoFinalTheme
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel

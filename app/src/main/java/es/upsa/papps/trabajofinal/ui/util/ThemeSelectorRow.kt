@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import es.upsa.papps.trabajofinal.R
-import es.upsa.papps.trabajofinal.repository.AppTheme
+import es.upsa.papps.trabajofinal.model.repository.AppTheme
 
 @Composable
 fun ThemeSelectorRow(
