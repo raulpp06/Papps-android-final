@@ -27,7 +27,7 @@ fun TaskEditScreen(
         Routes.Subroutes.TASK -> state.tasks.find { it.id == id }
         Routes.Subroutes.EXAM -> state.exams.find { it.id == id }
         else -> return
-    }?: return
+    } ?: return
     val subjects = state.subjects
 
     LaunchedEffect(task) {

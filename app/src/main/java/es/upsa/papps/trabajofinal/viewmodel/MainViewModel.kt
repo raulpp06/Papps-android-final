@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -42,6 +43,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         examRepo.getAllFlow(),
         _filters,
     ) { subjects, tasks, exams, filters ->
+
+        val now = LocalDateTime.now()
+
+        // auto-mark completados si ya ha pasado el tiempo cuando la app carga
+        exams.forEach { exam ->
+            val examDateTime = LocalDateTime.of(exam.dueDate, exam.examHour)
+
+            if (!exam.isCompleted && now.isAfter(examDateTime)) {
+                examRepo.setCompleted(exam.id, true)
+            }
+        }
+
         MainUiState(
             subjects = subjects,
             tasks = tasks,
@@ -116,14 +129,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteTask(id: Int) {
         viewModelScope.launch {
-            val task = uiState.value.tasks.find { it.id == id } ?: return@launch
+            uiState.value.tasks.find { it.id == id } ?: return@launch
             taskRepo.deleteById(id)
         }
     }
 
     fun deleteExam(id: Int) {
         viewModelScope.launch {
-            val exam = uiState.value.exams.find { it.id == id } ?: return@launch
+            uiState.value.exams.find { it.id == id } ?: return@launch
             examRepo.deleteById(id)
         }
     }

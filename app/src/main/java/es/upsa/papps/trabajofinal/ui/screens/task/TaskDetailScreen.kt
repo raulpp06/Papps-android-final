@@ -78,7 +78,9 @@ fun TaskDetailScreen(
                             when (task) {
                                 is Exam -> vm.deleteExam(id)
                                 is Task -> vm.deleteTask(id)
-                                else -> {error("unreachable")}
+                                else -> {
+                                    error("unreachable")
+                                }
                             }
                         },
                     ) {

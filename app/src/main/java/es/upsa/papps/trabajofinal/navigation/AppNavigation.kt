@@ -84,7 +84,7 @@ fun AppNavigation(
             popExitTransition = { slideDownExit },
         ) { backstack ->
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
-            val type = backstack.arguments?.getString("type")?: ""
+            val type = backstack.arguments?.getString("type") ?: ""
             if (id != null) TaskDetailScreen(navController, id, vm, type)
         }
 
@@ -92,7 +92,7 @@ fun AppNavigation(
             "${Routes.TASK_EDIT}/{type}/{id}",
         ) { backstack ->
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
-            val type = backstack.arguments?.getString("type")?: ""
+            val type = backstack.arguments?.getString("type") ?: ""
             if (id != null) TaskEditScreen(navController, id, vm, type)
         }
 

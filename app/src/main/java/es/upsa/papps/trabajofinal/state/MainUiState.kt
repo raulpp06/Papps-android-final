@@ -18,16 +18,20 @@ data class MainUiState(
 ) {
     fun isEmpty(): Boolean = subjects.isEmpty() && tasks.isEmpty()
 
-    @Suppress("UNCHECKED_CAST")
-    val filteredTasks_: List<Task>
-        get() = filterList(tasks, activeTaskFilters) as List<Task> // estamos filtrando una lista que solo tiene tasks, el cast funciona
+    val filteredTasks: List<Task>
+        get() = filterList(
+            tasks,
+            activeTaskFilters
+        )
 
-    @Suppress("UNCHECKED_CAST")
-    val filteredExams_: List<Exam>
-        get() = filterList(exams, activeTaskFilters) as List<Exam> // estamos filtrando una lista que solo tiene tasks, el cast funciona
+    val filteredExams: List<Exam>
+        get() = filterList(
+            exams,
+            activeTaskFilters
+        )
 
     companion object {
-        fun filterList(list: List<TaskBase>, filters: TaskFilters) =
+        fun <T : TaskBase> filterList(list: List<T>, filters: TaskFilters) =
             list.filter { task ->
 
                 val statusMatch = when (filters.status) {
