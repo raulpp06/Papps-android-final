@@ -1,15 +1,22 @@
 package es.upsa.papps.trabajofinal.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import es.upsa.papps.trabajofinal.model.data.Subject
 import es.upsa.papps.trabajofinal.model.data.Task
 import es.upsa.papps.trabajofinal.model.data.TaskBase
 import es.upsa.papps.trabajofinal.model.data.TaskFilters
+import es.upsa.papps.trabajofinal.repository.AppTheme
+import es.upsa.papps.trabajofinal.repository.ThemePreferenceRepository
 import es.upsa.papps.trabajofinal.state.MainUiState
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _uiState =
         MutableStateFlow(
             MainUiState(
@@ -18,6 +25,11 @@ class MainViewModel : ViewModel() {
                 activeTaskFilters = TaskFilters(),
             ),
         )
+
+    private val themeRepo = ThemePreferenceRepository(application)
+
+    val appTheme: StateFlow<AppTheme> = themeRepo.theme
+        .stateIn(viewModelScope, SharingStarted.Eagerly, AppTheme.SYSTEM)
 
     val uiState: StateFlow<MainUiState> = _uiState
 
@@ -93,5 +105,11 @@ class MainViewModel : ViewModel() {
 
     fun clearFilters(newFilters: TaskFilters) {
         _uiState.value = _uiState.value.copy(activeTaskFilters = TaskFilters())
+    }
+
+    fun setTheme(theme: AppTheme) {
+        viewModelScope.launch {
+            themeRepo.setTheme(theme)
+        }
     }
 }

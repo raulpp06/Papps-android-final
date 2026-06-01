@@ -70,4 +70,11 @@
     <string name="ui_date_from">Desde</string>
     <string name="ui_date_to">Hasta</string>
     <string name="ui_apply_filters">Aplicar filtros</string>
+
+    <!-- Themes -->
+    <string name="ui_theme_system">Tema del sistema</string>
+    <string name="ui_theme_light">Tema claro</string>
+    <string name="ui_theme_dark">Tema oscuro</string>
+    <string name="ui_settings">Ajustes</string>
+    <string name="ui_theme">Tema</string>
 </resources>

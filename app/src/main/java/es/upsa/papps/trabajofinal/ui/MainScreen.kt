@@ -3,8 +3,8 @@ package es.upsa.papps.trabajofinal.ui
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -42,6 +42,15 @@ fun MainScreen(vm: MainViewModel) {
                     },
                     label = { Text(stringResource(R.string.ui_type_tasks)) },
                     icon = { Icon(Icons.Default.Menu, null) },
+                )
+
+                NavigationBarItem(
+                    selected = false,
+                    onClick = {
+                        navController.navigate(Routes.SETTINGS)
+                    },
+                    label = { Text(stringResource(R.string.ui_settings)) },
+                    icon = { Icon(Icons.Default.Settings, null) },
                 )
             }
         },

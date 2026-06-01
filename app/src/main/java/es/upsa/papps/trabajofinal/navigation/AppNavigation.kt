@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import es.upsa.papps.trabajofinal.ui.screens.SettingsScreen
 import es.upsa.papps.trabajofinal.ui.screens.subject.SubjectAddScreen
 import es.upsa.papps.trabajofinal.ui.screens.subject.SubjectDetailScreen
 import es.upsa.papps.trabajofinal.ui.screens.subject.SubjectEditScreen
@@ -15,7 +16,6 @@ import es.upsa.papps.trabajofinal.ui.screens.subject.SubjectsScreen
 import es.upsa.papps.trabajofinal.ui.screens.task.TaskAddScreen
 import es.upsa.papps.trabajofinal.ui.screens.task.TaskDetailScreen
 import es.upsa.papps.trabajofinal.ui.screens.task.TaskEditScreen
-import es.upsa.papps.trabajofinal.ui.screens.task.TaskFilterSheetContent
 import es.upsa.papps.trabajofinal.ui.screens.task.TasksScreen
 import es.upsa.papps.trabajofinal.viewmodel.MainViewModel
 
@@ -92,6 +92,12 @@ fun AppNavigation(
         ) { backstack ->
             val id = backstack.arguments?.getString("id")?.toIntOrNull()
             if (id != null) TaskEditScreen(navController, id, vm)
+        }
+
+        composable(
+            Routes.SETTINGS,
+        ) {
+            SettingsScreen(vm)
         }
     }
 }

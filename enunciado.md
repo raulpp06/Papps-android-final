@@ -22,7 +22,7 @@ Calificación:
 * Manejo adecuado y encapsulación avanzada del estado en Compose y Navigation [SUPONGO]
 * Diseño UI cuidado y consistente [NO]
 * Uso de Navigation Drawer o Bottom Navigation [HECHO]
-* Gestión de temas (claro/oscuro) [NO]
+* Gestión de temas (claro/oscuro) [HECHO]
 * Uso de persistencia local (Room) [NO]
 * Implementación de una capa repository. [NO]
 - **Sobresaliente**: Sólo se podrá optar a la calificación Sobresaliente si se ha superado la parte correspondiente al notable. Además, la aplicación deberá incluir al menos cinco funcionalidades avanzadas adicionales, tales como:
