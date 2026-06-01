@@ -44,7 +44,6 @@ fun AbstractTaskForm(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier.padding(16.dp)) {
-        // TITLE
         OutlinedTextField(
             value = title,
             onValueChange = onTitleChange,
@@ -54,7 +53,6 @@ fun AbstractTaskForm(
 
         Spacer(Modifier.height(12.dp))
 
-        // SUBJECT
         SubjectPickerField(
             subjects = subjects,
             subjectId = subjectId,
@@ -64,7 +62,6 @@ fun AbstractTaskForm(
 
         Spacer(Modifier.height(12.dp))
 
-        // DATE
         DatePickerField(
             value = dueDate,
             onValueChange = onDueDateChange,
@@ -74,7 +71,6 @@ fun AbstractTaskForm(
 
         Spacer(Modifier.height(16.dp))
 
-        // TYPE TOGGLE
         Row(
             modifier = Modifier.fillMaxWidth(),
         ) {
@@ -111,7 +107,6 @@ fun AbstractTaskForm(
 
         Spacer(Modifier.height(16.dp))
 
-        // EXAM FIELDS
         if (isExam) {
             OutlinedTextField(
                 value = examRoom,

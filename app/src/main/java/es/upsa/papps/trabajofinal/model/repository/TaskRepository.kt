@@ -28,8 +28,8 @@ class TaskRepository(private val dao: TaskDao) {
 
     fun getFilteredFlow(filters: TaskFilters): Flow<List<Task>> {
         val subjectId: Int? = when (val s = filters.subject) {
-            is TaskSubjectFilter.All -> null       // no filter on subject
-            is TaskSubjectFilter.NoSubject -> -1   // sentinel: will use separate query
+            is TaskSubjectFilter.All -> null
+            is TaskSubjectFilter.NoSubject -> -1
             is TaskSubjectFilter.Subject -> s.subjectId
         }
 

@@ -30,7 +30,7 @@ class ExamRepository(private val dao: ExamDao) {
         val subjectId: Int? = when (val s = filters.subject) {
             is TaskSubjectFilter.All -> null
             is TaskSubjectFilter.NoSubject -> return dao.getAllFlow()
-                .map { emptyList() } // Exams always have a subject
+                .map { emptyList() } // examenes siempre tienen una asignatura
             is TaskSubjectFilter.Subject -> s.subjectId
         }
 

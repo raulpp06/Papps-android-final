@@ -64,7 +64,6 @@ fun TaskFilterSheetContent(
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        // ---------------- STATUS ----------------
         ExposedDropdownMenuBox(
             expanded = expandedStatus,
             onExpandedChange = { expandedStatus = it }
@@ -108,7 +107,6 @@ fun TaskFilterSheetContent(
 
         Spacer(Modifier.height(12.dp))
 
-        // ---------------- SUBJECT ----------------
         ExposedDropdownMenuBox(
             expanded = expandedSubject,
             onExpandedChange = { expandedSubject = it }
@@ -160,7 +158,6 @@ fun TaskFilterSheetContent(
 
         Spacer(Modifier.height(12.dp))
 
-        // ---------------- TYPE ----------------
         Text(stringResource(R.string.ui_task_type))
         Spacer(Modifier.height(8.dp))
         Row {
@@ -185,7 +182,6 @@ fun TaskFilterSheetContent(
 
         Spacer(Modifier.height(12.dp))
 
-        // ---------------- DATE FROM ----------------
         DatePickerField(
             label = { Text(stringResource(R.string.ui_date_from)) },
             value = fromDate,
@@ -195,7 +191,6 @@ fun TaskFilterSheetContent(
 
         Spacer(Modifier.height(12.dp))
 
-        // ---------------- DATE TO ----------------
         DatePickerField(
             label = { Text(stringResource(R.string.ui_date_to)) },
             value = toDate,
@@ -205,7 +200,6 @@ fun TaskFilterSheetContent(
 
         Spacer(Modifier.height(20.dp))
 
-        // ---------------- APPLY ----------------
         Button(
             onClick = {
                 vm.updateFilters(
